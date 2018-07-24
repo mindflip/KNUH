@@ -42,11 +42,20 @@
         android:inputType="textPersonName"
         android:textAlignment="center" />
 
-    <Button
-        android:id="@+id/btChaneAddrNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="0"
-        android:text="주소 변경" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btChaneAddrNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="주소 변경"
+            android:background="@drawable/button_design1"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
 </LinearLayout>

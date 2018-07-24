@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
+        android:layout_marginTop="50dp"
         app:srcCompat="@drawable/knuhlogo1" />
 
     <EditText
@@ -37,10 +38,19 @@
         android:inputType="numberPassword"
         android:textAlignment="center" />
 
-    <Button
-        android:id="@+id/btLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="로그인" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/btLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_design1"
+            android:text="로그인"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
 </LinearLayout>

@@ -1,15 +1,16 @@
 package com.example.user.knuhui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.ivTicket :
+                    intent = new Intent(MainActivity.this, Ticket_Activity.class);
+                    startActivity(intent);
                     break;
 
                 case R.id.ivTreatment :
@@ -71,9 +74,73 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void menuInflate(int imageView, int menu){
-        PopupMenu pum = new PopupMenu(MainActivity.this, findViewById(imageView));
+        PopupMenu pum = new PopupMenu(getApplicationContext(), findViewById(imageView));
         pum.inflate(menu);
         pum.show();
+
+        pum.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent;
+                Toast.makeText(getApplicationContext(), "팝업메뉴 이벤트 처리 - " + item.getTitle(),Toast.LENGTH_SHORT).show();
+                switch (item.getItemId()){
+                    case R.id.itTrReserve:
+                        intent = new Intent(MainActivity.this, Reservation_Activity.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.itReserveRecord:
+                        intent = new Intent(MainActivity.this, Reservation_Search_Activity.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.itDestination:
+                        intent = new Intent(MainActivity.this, RoadList_Activity.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.itWaiting:
+                        intent = new Intent(MainActivity.this, Wait_Search_Activity.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.itTrRecord:
+                        intent = new Intent(MainActivity.this, History_Search_Activity.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.itTrSearch:
+                        intent = new Intent(MainActivity.this, Treatment_Search_Activity.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.itChangeGown:
+                        callDialog((String) item.getTitle());
+                        break;
+
+                    case R.id.itChangeSheet:
+                        callDialog((String) item.getTitle());
+                        break;
+
+                    case R.id.itChangeFluid:
+                        callDialog((String) item.getTitle());
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
+    private void callDialog(String title){
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage("입원환자가 아닙니다.");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
 }

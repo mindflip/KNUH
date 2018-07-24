@@ -25,7 +25,18 @@
         <activity android:name=".ChangepwActivity" />
         <activity android:name=".ChangecarnumActivity" />
         <activity android:name=".ChangephnumActivity" />
-        <activity android:name=".ChangeaddrActivity"></activity>
+        <activity android:name=".ChangeaddrActivity"/>
+        <activity android:name=".Wait_Search_Activity" />
+        <activity android:name=".Reservation_Search_Activity" />
+        <activity android:name=".RoadList_Activity" />
+        <activity android:name=".History1_Activity" />
+        <activity android:name=".History2_Activity" />
+        <activity android:name=".History3_Activity" />
+        <activity android:name=".History4_Activity" />
+        <activity android:name=".Treatment_Search_Activity" />
+        <activity android:name=".Reservation_Activity" />
+        <activity android:name=".History_Search_Activity" />
+        <activity android:name=".Ticket_Activity" />
     </application>
 
 </manifest>

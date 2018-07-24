@@ -2,6 +2,7 @@ package com.example.user.knuhui;
 
 import android.content.Intent;
 import android.provider.ContactsContract;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,9 +21,17 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, LIST_MENU);
+        Profile_ListViewAdapter adapter = new Profile_ListViewAdapter();
+
+//        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, LIST_MENU);
         lvProfile = (ListView) findViewById(R.id.lvProfile);
         lvProfile.setAdapter(adapter);
+        adapter.addItem("동의서 조회", ContextCompat.getDrawable(this, R.drawable.arrow));
+        adapter.addItem("비밀번호 변경", ContextCompat.getDrawable(this, R.drawable.arrow));
+        adapter.addItem("차량번호 변경", ContextCompat.getDrawable(this, R.drawable.arrow));
+        adapter.addItem("휴대전화번호 변경", ContextCompat.getDrawable(this, R.drawable.arrow));
+        adapter.addItem("주소 변경", ContextCompat.getDrawable(this, R.drawable.arrow));
+
 
         lvProfile.setOnItemClickListener(onItemClickListener);
     }

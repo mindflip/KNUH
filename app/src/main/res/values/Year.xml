@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="year">
+        <item>년</item>
+        <item>2018년</item>
+        <item>2019년</item>
+    </string-array>
+</resources>

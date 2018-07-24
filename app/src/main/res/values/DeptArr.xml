@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="dept">
+        <item>[진료과선택]</item>
+        <item>산부인과</item>
+        <item>신경외과</item>
+        <item>이비인후과</item>
+        <item>재활의학과</item>
+        <item>정형외과</item>
+        <item>흉부외과</item>
+    </string-array>
+</resources>

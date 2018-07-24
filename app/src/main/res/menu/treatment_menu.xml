@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/itDestination"
         android:title="진료실, 검사실 위치 안내"
         android:visible="true" />
     <item
+        android:id="@+id/itWaiting"
         android:title="진료 대기시간 조회"
         android:visible="true" />
     <item
+        android:id="@+id/itTrRecord"
         android:title="진료 이력 조회"
+        android:visible="true" />
+    <item
+        android:id="@+id/itTrSearch"
+        android:title="처방 조회"
         android:visible="true" />
 </menu>
