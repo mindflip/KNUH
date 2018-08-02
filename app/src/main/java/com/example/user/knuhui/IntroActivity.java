@@ -7,6 +7,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+import com.example.user.knuhui.history.History_Search_Activity;
+
 public class IntroActivity extends AppCompatActivity {
 
     @Override

@@ -20,23 +20,23 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".ConsentActivity" />
-        <activity android:name=".ChangepwActivity" />
-        <activity android:name=".ChangecarnumActivity" />
-        <activity android:name=".ChangephnumActivity" />
-        <activity android:name=".ChangeaddrActivity"/>
-        <activity android:name=".Wait_Search_Activity" />
-        <activity android:name=".Reservation_Search_Activity" />
+        <activity android:name=".profile.ProfileActivity" />
+        <activity android:name=".profile.ConsentActivity" />
+        <activity android:name=".profile.ChangepwActivity" />
+        <activity android:name=".profile.ChangecarnumActivity" />
+        <activity android:name=".profile.ChangephnumActivity" />
+        <activity android:name=".profile.ChangeaddrActivity"/>
+        <activity android:name=".treatment.Wait_Search_Activity" />
+        <activity android:name=".reservation.Reservation_Search_Activity" />
         <activity android:name=".RoadList_Activity" />
-        <activity android:name=".History1_Activity" />
-        <activity android:name=".History2_Activity" />
-        <activity android:name=".History3_Activity" />
-        <activity android:name=".History4_Activity" />
-        <activity android:name=".Treatment_Search_Activity" />
-        <activity android:name=".Reservation_Activity" />
-        <activity android:name=".History_Search_Activity" />
-        <activity android:name=".Ticket_Activity" />
+        <activity android:name=".history.History1_Activity" />
+        <activity android:name=".history.History2_Activity" />
+        <activity android:name=".history.History3_Activity" />
+        <activity android:name=".history.History4_Activity" />
+        <activity android:name=".treatment.Treatment_Search_Activity" />
+        <activity android:name=".reservation.Reservation_Activity" />
+        <activity android:name=".history.History_Search_Activity" />
+        <activity android:name=".ticket.Ticket_Activity" />
     </application>
 
 </manifest>

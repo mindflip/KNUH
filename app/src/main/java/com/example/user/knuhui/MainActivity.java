@@ -12,6 +12,14 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.example.user.knuhui.history.History_Search_Activity;
+import com.example.user.knuhui.profile.ProfileActivity;
+import com.example.user.knuhui.reservation.Reservation_Activity;
+import com.example.user.knuhui.reservation.Reservation_Search_Activity;
+import com.example.user.knuhui.ticket.Ticket_Activity;
+import com.example.user.knuhui.treatment.Treatment_Search_Activity;
+import com.example.user.knuhui.treatment.Wait_Search_Activity;
+
 public class MainActivity extends AppCompatActivity {
 
     private ImageView ivReserve, ivTicket, ivTreatment, ivPayment, ivCall, ivSetting;
