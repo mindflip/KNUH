@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.example.user.knuhui.dicom.android.dicomviewer.DICOMFileChooser;
 import com.example.user.knuhui.history.History_Search_Activity;
 import com.example.user.knuhui.profile.ProfileActivity;
 import com.example.user.knuhui.reservation.Reservation_Activity;
@@ -119,6 +120,11 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.itTrSearch:
                         intent = new Intent(MainActivity.this, Treatment_Search_Activity.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.itDicom:
+                        intent = new Intent(MainActivity.this, DICOMFileChooser.class);
                         startActivity(intent);
                         break;
 

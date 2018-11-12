@@ -16,4 +16,8 @@
         android:id="@+id/itTrSearch"
         android:title="처방 조회"
         android:visible="true" />
+    <item
+        android:id="@+id/itDicom"
+        android:title="의료 영상 조회"
+        android:visible="true" />
 </menu>
