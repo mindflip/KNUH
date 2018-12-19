@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         initPref();
         initLayout();
 
-        networkManager = new NetworkManager("https://navi.knuh.kr/knuh/postreq/");
+        networkManager = new NetworkManager(NetworkManager.RELAY_URL_POST);
         relayService = networkManager.getRelayService();
 
         introDialog();
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 //    }
 //
     private void callTest3() {
-        Call<UpdateVehicleNo> call = relayService.updateVehicleNo("93888", "4321");
+        Call<UpdateVehicleNo> call = relayService.updateVehicleNo("93888", "1224");
 
         call.enqueue(new Callback<UpdateVehicleNo>() {
             @Override
