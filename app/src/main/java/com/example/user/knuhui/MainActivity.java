@@ -27,6 +27,8 @@ import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDe
 import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDept.GetRevDeptResult;
 import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDoc.GetRevDoc;
 import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDoc.GetRevDocResult;
+import com.example.user.knuhui.networkmanager.model.userinfo.updateVehicleNo.UpdateVehicleNo;
+import com.example.user.knuhui.networkmanager.model.userinfo.updateVehicleNo.UpdateVehicleNoResult;
 import com.example.user.knuhui.networkmanager.service.RelayService;
 import com.example.user.knuhui.profile.ProfileActivity;
 import com.example.user.knuhui.reservation.Reservation_Activity;
@@ -65,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
         initPref();
         initLayout();
 
-        networkManager = NetworkManager.getInstance();
-        relayService = NetworkManager.getRelayService();
+        networkManager = new NetworkManager("https://navi.knuh.kr/knuh/postreq/");
+        relayService = networkManager.getRelayService();
 
         introDialog();
 
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         pId = intent.getExtras().getString("pId");
         Log.d("getIntent", "/////////////////"+pId);
 
-//        callTest3();
+        callTest3();
 
     }
 //
@@ -127,28 +129,27 @@ public class MainActivity extends AppCompatActivity {
 //
 //    }
 //
-//    private void callTest3() {
-//        Call<GetRevDoc> call = relayService.getResults();
-//
-//        call.enqueue(new Callback<GetRevDoc>() {
-//            @Override
-//            public void onResponse(Call<GetRevDoc> call, Response<GetRevDoc> response) {
-//                if(response.isSuccessful()) {
-//
-//                    GetRevDocResult item = response.body().getResultinfo().getResult();
-//
-//                    Log.d("resultResp", item.toString());
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<GetRevDoc> call, Throwable t) {
-//                Log.e("Not Response", t.getLocalizedMessage());
-//            }
-//        });
-//
-//    }
+    private void callTest3() {
+        Call<UpdateVehicleNo> call = relayService.updateVehicleNo("93888", "4321");
+
+        call.enqueue(new Callback<UpdateVehicleNo>() {
+            @Override
+            public void onResponse(Call<UpdateVehicleNo> call, Response<UpdateVehicleNo> response) {
+                if(response.isSuccessful()) {
+
+                    UpdateVehicleNoResult item = response.body().getResultinfo().getResult();
+
+                    Log.d("resultResp", item.toString());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UpdateVehicleNo> call, Throwable t) {
+                Log.e("Not Response", t.getLocalizedMessage());
+            }
+        });
+    }
 //
 //    private void callTest4() {
 //        Call<GetRevDept> call = relayService.getRevDept();
@@ -370,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
                         if (dialogItem == 0) {
                             intent = new Intent(MainActivity.this, RoadList_Activity.class);
                             intent.putExtra("startPoint", "외래접수동");
-                            intent.putExtra("endPoint","체혈실");
+                            intent.putExtra("endPoint","채혈실");
                             startActivity(intent);
                         } else {
                             intent = new Intent (MainActivity.this, Treatment_Search_Activity.class);

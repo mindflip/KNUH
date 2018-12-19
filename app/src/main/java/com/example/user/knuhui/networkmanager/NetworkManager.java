@@ -14,11 +14,11 @@ public class NetworkManager {
     public static final String RELAY_URL_GET = "https://navi.knuh.kr/knuh/getreq";
     public static final String RELAY_URL_POST = "https://navi.knuh.kr/knuh/postreq";
 
-    private static NetworkManager instance = null;
-    private static RelayService relayService = null;
+    private NetworkManager instance = null;
+    private RelayService relayService;
     private Retrofit retrofit;
 
-    private NetworkManager() {
+    public NetworkManager(String baseUrl) {
 
         OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
 
@@ -30,7 +30,7 @@ public class NetworkManager {
         }
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(TEST_IP)
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpBuilder.build())
                 .build();
@@ -38,14 +38,7 @@ public class NetworkManager {
         relayService = retrofit.create(RelayService.class);
     }
 
-    public static NetworkManager getInstance() {
-        if (instance == null) {
-            instance = new NetworkManager();
-        }
-        return instance;
-    }
-
-    public static RelayService getRelayService() {
+    public RelayService getRelayService() {
         return relayService;
     }
 }

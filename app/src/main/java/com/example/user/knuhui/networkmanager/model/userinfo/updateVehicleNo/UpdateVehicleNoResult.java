@@ -18,4 +18,10 @@ public class UpdateVehicleNoResult {
         this.count = count;
     }
 
+    @Override
+    public String toString() {
+        return "UpdateVehicleNoResult{" +
+                "count='" + count + '\'' +
+                '}';
+    }
 }

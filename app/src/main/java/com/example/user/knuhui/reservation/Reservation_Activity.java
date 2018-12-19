@@ -38,6 +38,8 @@ public class Reservation_Activity extends AppCompatActivity {
     private Spinner spDept, spDoc, spDate, spTime;
     private Spinner spinnerTest;
 
+    private NetworkManager getNetworkManager;
+    private NetworkManager postNetworkManager;
     private RelayService relayService;
     private String[] Temp0, Temp1;
 
@@ -57,15 +59,19 @@ public class Reservation_Activity extends AppCompatActivity {
         initLayout();
 
         getRevListResult = new GetRevListResult();
-//
-//        relayService = NetworkManager.getRelayService();
-//        getRevDept();
+
+        getNetworkManager = new NetworkManager(NetworkManager.RELAY_URL_GET);
+        postNetworkManager = new NetworkManager(NetworkManager.RELAY_URL_POST);
+
+        relayService = getNetworkManager.getRelayService();
+
+        getRevDept();
 
 
-        Temp0 = getResources().getStringArray(R.array.getRevDept);
-        for ( String i : Temp0) {
-            Log.d("StringArrayRes", "///////////    " + i);
-        }
+//        Temp0 = getResources().getStringArray(R.array.getRevDept);
+//        for ( String i : Temp0) {
+//            Log.d("StringArrayRes", "///////////    " + i);
+//        }
 
         Button button = (Button)findViewById(R.id.btReservation);
 
@@ -199,7 +205,7 @@ public class Reservation_Activity extends AppCompatActivity {
 
     private void getRevDept() {
         // Service 메서드는 바뀔 수 있음 / 지금은 테스트용
-        retrofit2.Call<GetRevDept> call = relayService.getRevDeptTest();
+        retrofit2.Call<GetRevDept> call = relayService.getRevDept();
         call.enqueue(new Callback<GetRevDept>() {
             @Override
             public void onResponse(retrofit2.Call<GetRevDept> call, Response<GetRevDept> response) {

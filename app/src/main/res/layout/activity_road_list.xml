@@ -75,14 +75,33 @@
             android:text="검색"
             android:textColor="#ffffff" />
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/ivRoadMap"
+    <com.otaliastudios.zoom.ZoomLayout
+        android:id="@+id/zoomLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/floor1" />
+        android:scrollbars="vertical|horizontal"
+        app:overScrollHorizontal="true"
+        app:overScrollVertical="true"
+        app:overPinchable="true"
+        app:horizontalPanEnabled="true"
+        app:verticalPanEnabled="true"
+        app:zoomEnabled="true"
+        app:minZoom="0.7"
+        app:minZoomType="zoom"
+        app:maxZoom="3.0"
+        app:maxZoomType="zoom"
+        app:hasClickableChildren="false">
+
+        <!-- Content here. -->
+        <com.example.user.knuhui.PathView
+            android:id="@+id/pathView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/knuh_floor1" />
+
+    </com.otaliastudios.zoom.ZoomLayout>
+
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
