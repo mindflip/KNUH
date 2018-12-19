@@ -1,10 +1,17 @@
 package com.example.user.knuhui;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -14,23 +21,169 @@ import android.widget.Toast;
 
 import com.example.user.knuhui.dicom.android.dicomviewer.DICOMFileChooser;
 import com.example.user.knuhui.history.History_Search_Activity;
+import com.example.user.knuhui.networkmanager.NetworkManager;
+import com.example.user.knuhui.networkmanager.model.User;
+import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDept.GetRevDept;
+import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDept.GetRevDeptResult;
+import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDoc.GetRevDoc;
+import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDoc.GetRevDocResult;
+import com.example.user.knuhui.networkmanager.service.RelayService;
 import com.example.user.knuhui.profile.ProfileActivity;
 import com.example.user.knuhui.reservation.Reservation_Activity;
 import com.example.user.knuhui.reservation.Reservation_Search_Activity;
 import com.example.user.knuhui.ticket.Ticket_Activity;
 import com.example.user.knuhui.treatment.Treatment_Search_Activity;
 import com.example.user.knuhui.treatment.Wait_Search_Activity;
+import com.google.gson.JsonObject;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageView ivReserve, ivTicket, ivTreatment, ivPayment, ivCall, ivSetting;
+    private NetworkManager networkManager;
+    private RelayService relayService;
+
+    private ImageView ivReserve, ivTicket, ivTreatment, ivPayment, ivCall, ivSetting, ivDicom;
+
+    private BottomNavigationView bottomNavigationView;
+    private BottomNaviSet bottomNaviSet;
+
+    private String pId;
+
+    private int dialogItem;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
+        initPref();
         initLayout();
+
+        networkManager = NetworkManager.getInstance();
+        relayService = NetworkManager.getRelayService();
+
+        introDialog();
+
+        Log.d("actname", this.getClass().getSimpleName());
+
+        Intent intent = getIntent();
+        pId = intent.getExtras().getString("pId");
+        Log.d("getIntent", "/////////////////"+pId);
+
+//        callTest3();
+
+    }
+//
+//    private void callTest1(){
+//
+//        Call<List<User>> call = relayService.getUsers();
+//
+//        call.enqueue(new Callback<List<User>>() {
+//            @Override
+//            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+//                if(response.isSuccessful()) {
+//
+//                    List<User> item = response.body();
+//
+//                    for(int i = 0; i < item.size(); i++) {
+//                        Log.d("usersResponse", item.get(i).toString());
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<User>> call, Throwable t) {
+//                Log.e("Not Response", t.getLocalizedMessage());
+//            }
+//        });
+//    }
+//
+//    private void callTest2() {
+//        Call<GetRevDept> call = relayService.getResults();
+//
+//        call.enqueue(new Callback<GetRevDept>() {
+//            @Override
+//            public void onResponse(Call<GetRevDept> call, Response<GetRevDept> response) {
+//                if(response.isSuccessful()) {
+//                    List<GetRevDeptResult> item = response.body().getResultinfo().getResult();
+//
+//                    for(int i=0; i < item.size(); i++) {
+//                        Log.d("resultResp", item.get(i).toString());
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<GetRevDept> call, Throwable t) {
+//                Log.e("Not Response", t.getLocalizedMessage());
+//            }
+//        });
+//
+//    }
+//
+//    private void callTest3() {
+//        Call<GetRevDoc> call = relayService.getResults();
+//
+//        call.enqueue(new Callback<GetRevDoc>() {
+//            @Override
+//            public void onResponse(Call<GetRevDoc> call, Response<GetRevDoc> response) {
+//                if(response.isSuccessful()) {
+//
+//                    GetRevDocResult item = response.body().getResultinfo().getResult();
+//
+//                    Log.d("resultResp", item.toString());
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<GetRevDoc> call, Throwable t) {
+//                Log.e("Not Response", t.getLocalizedMessage());
+//            }
+//        });
+//
+//    }
+//
+//    private void callTest4() {
+//        Call<GetRevDept> call = relayService.getRevDept();
+//
+//        call.enqueue(new Callback<GetRevDept>() {
+//            @Override
+//            public void onResponse(Call<GetRevDept> call, Response<GetRevDept> response) {
+//                Log.d("a","b");
+//            }
+//
+//            @Override
+//            public void onFailure(Call<GetRevDept> call, Throwable t) {
+//                Log.e("Not Response", t.getLocalizedMessage());
+//
+//            }
+//        });
+//
+//    }
+
+    private void initPref() {
+        SharedPreferences testUserPreferences = getSharedPreferences("testUser",MODE_PRIVATE);
+
+        testUserPreferences.getString("birthDt","20150725");
+        testUserPreferences.getString("pNm", "전산실.");
+        testUserPreferences.getString("cellphoneNo","01031533455");
+        testUserPreferences.getString("pId","93888");
+        testUserPreferences.getString("genderCd","F");
+        testUserPreferences.getString("inHospitalYn","N");
+        testUserPreferences.getString("vehicleNo","실험1234");
+        testUserPreferences.getString("zipCode","700740");
+        testUserPreferences.getString("zipCodeTxt","경북 김천시 어모면");
+        testUserPreferences.getString("address","T");
+
+        SharedPreferences.Editor editor = testUserPreferences.edit();
+//        if(testUserPreferences.getString("name"))
     }
 
     private void initLayout(){
@@ -40,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
         ivPayment = (ImageView) findViewById(R.id.ivPayment);
         ivCall = (ImageView) findViewById(R.id.ivCall);
         ivSetting = (ImageView) findViewById(R.id.ivSetting);
+        ivDicom = (ImageView) findViewById(R.id.ivDicom);
 
         ivReserve.setOnClickListener(onClickListener);
         ivTicket.setOnClickListener(onClickListener);
@@ -47,6 +201,10 @@ public class MainActivity extends AppCompatActivity {
         ivPayment.setOnClickListener(onClickListener);
         ivCall.setOnClickListener(onClickListener);
         ivSetting.setOnClickListener(onClickListener);
+        ivDicom.setOnClickListener(onClickListener);
+
+        bottomNaviSet = new BottomNaviSet(this,this.getClass().getSimpleName());
+        bottomNavigationView = bottomNaviSet.getBottomNavigationView();
     }
 
     private Button.OnClickListener onClickListener = new View.OnClickListener() {
@@ -78,6 +236,10 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(MainActivity.this, ProfileActivity.class);
                     startActivity(intent);
                     break;
+
+                case R.id.ivDicom :
+                    intent = new Intent(MainActivity.this, DICOMFileChooser.class);
+                    startActivity(intent);
             }
         }
     };
@@ -123,11 +285,6 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
 
-                    case R.id.itDicom:
-                        intent = new Intent(MainActivity.this, DICOMFileChooser.class);
-                        startActivity(intent);
-                        break;
-
                     case R.id.itChangeGown:
                         callDialog((String) item.getTitle());
                         break;
@@ -156,5 +313,75 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         alertDialog.show();
+    }
+
+    private void introDialog() {
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("내원 알림");
+        alertDialog.setMessage("내원을 환영합니다.");
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "닫기",
+                new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        noticeDialog();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    private void noticeDialog() {
+        final ProgressDialog pd = new ProgressDialog(MainActivity.this,R.style.MyAlertDialogStyle);
+        pd.setMessage("알림 수신 중입니다.");
+        pd.show();
+
+        Handler pdCanceller = new Handler();
+        pdCanceller.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                pd.cancel();
+                testReservDialog();
+            }
+        }, 3000);
+    }
+
+    private void testReservDialog() {
+
+        final CharSequence[] testList = {"혈액검사실로 가세요.", "CT실로 가세요."};
+        AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
+        alt_bld.setTitle("2건의 검사예약이 있습니다");
+        alt_bld.setSingleChoiceItems(testList, -1, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                Toast.makeText(getApplicationContext(), "검사항목 = "+testList[item] + " / " + item, Toast.LENGTH_SHORT).show();
+                // dialog.cancel();
+                dialogItem = item;
+
+            }
+        });
+        AlertDialog alert = alt_bld.create();
+        alert.setButton(AlertDialog.BUTTON_POSITIVE, "확인",
+                new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+//                        Intent intent = (dialogItem == 0) ? new Intent(MainActivity.this, RoadList_Activity.class) : new Intent (MainActivity.this, Treatment_Search_Activity.class);
+//                        startActivity(intent);
+
+                        Intent intent;
+
+                        if (dialogItem == 0) {
+                            intent = new Intent(MainActivity.this, RoadList_Activity.class);
+                            intent.putExtra("startPoint", "외래접수동");
+                            intent.putExtra("endPoint","체혈실");
+                            startActivity(intent);
+                        } else {
+                            intent = new Intent (MainActivity.this, Treatment_Search_Activity.class);
+                            intent.putExtra("startPoint", "외래접수동");
+                            intent.putExtra("endPoint","CT촬영실");
+                            startActivity(intent);
+                        }
+                        dialog.dismiss();
+                    }
+                });
+        alert.show();
+
     }
 }

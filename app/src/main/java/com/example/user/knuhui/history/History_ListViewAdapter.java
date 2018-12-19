@@ -32,18 +32,18 @@ public class History_ListViewAdapter extends BaseAdapter{
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.history_item, parent, false);
+            convertView = inflater.inflate(R.layout.setting_item, parent, false);
         }
 
-        TextView textView1 = (TextView)convertView.findViewById(R.id.textview1);
-        ImageView imageView1 = (ImageView)convertView.findViewById(R.id.imageview1);
-
+        ImageView ivListIcon = (ImageView) convertView.findViewById(R.id.ivListIcon);
+        TextView tvListTitle = (TextView)convertView.findViewById(R.id.tvListTitle);
+        ImageView ivListArrow = (ImageView)convertView.findViewById(R.id.ivListArrow);
 
         HistoryItem listViewItem = listViewItemList.get(position);
 
-
-        textView1.setText(listViewItem.getMenu());
-        imageView1.setImageDrawable(listViewItem.getDrawable());
+        ivListIcon.setImageDrawable(listViewItem.getDrawableIcon());
+        tvListTitle.setText(listViewItem.getMenu());
+        ivListArrow.setImageDrawable(listViewItem.getDrawable());
         return convertView;
     }
 
@@ -56,9 +56,10 @@ public class History_ListViewAdapter extends BaseAdapter{
         return listViewItemList.get(position) ;
     }
 
-    public void addItem(String menu, Drawable drawable) {
+    public void addItem(Drawable icon, String menu, Drawable drawable) {
         HistoryItem item = new HistoryItem();
 
+        item.setDrawableIcon(icon);
         item.setMenu(menu);
         item.setDrawable(drawable);
 

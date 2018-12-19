@@ -24,4 +24,12 @@
         android:background="@drawable/button_design1"
         android:textColor="#ffffff"
         android:text="처방조회"/>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemBackground="@color/white">
+    </android.support.design.widget.BottomNavigationView>
+
 </LinearLayout>

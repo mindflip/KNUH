@@ -23,4 +23,11 @@
         android:textColor="#ffffff"
         android:text="대기시간조회"/>
 
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemBackground="@color/white">
+    </android.support.design.widget.BottomNavigationView>
+
 </LinearLayout>

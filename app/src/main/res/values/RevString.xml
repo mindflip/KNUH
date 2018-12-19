@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="getRevDept">
+        <item>[진료과선택]</item>
+        <item>방사선종양학과</item>
+        <item>산부인과</item>
+        <item>이비인후과</item>
+        <item>재활의학과</item>
+        <item>정형외과</item>
+        <item>핵의학과</item>
+        <item>흉부외과</item>
+    </string-array>
+
+    <string-array name ="getRevDoc_2170000000">
+        <item>김재철</item>
+    </string-array>
+
+    <string-array name ="getRevDoc_2100000000">
+        <item>이택후</item>
+    </string-array>
+
+    <string-array name ="getRevDoc_2130000000">
+        <item>김정수</item>
+        <item>유명훈</item>
+        <item>이규엽</item>
+        <item>정다정</item>
+    </string-array>
+
+    <string-array name ="getRevDoc_2220000000">
+        <item>김애령</item>
+        <item>김철현</item>
+        <item>이양수</item>
+        <item>정태두</item>
+    </string-array>
+
+    <string-array name ="getRevDoc_2050000000">
+        <item>김준우</item>
+        <item>백승훈</item>
+    </string-array>
+
+    <string-array name ="getRevDoc_2180000000">
+        <item>안병철</item>
+        <item>이재태</item>
+    </string-array>
+
+    <string-array name ="getRevDoc_2070000000">
+        <item>김근직</item>
+        <item>도영우</item>
+        <item>오탁혁</item>
+        <item>이덕헌</item>
+        <item>이영옥</item>
+        <item>조준용</item>
+    </string-array>
+
+    <string-array name="getRevDate_kjc">
+        <item>20181220</item>
+        <item>20181221</item>
+        <item>20181224</item>
+        <item>20181226</item>
+        <item>20181227</item>
+        <item>20181228</item>
+        <item>20181231</item>
+    </string-array>
+
+    <string-array name="getRevDate_lth">
+        <item>20181220</item>
+        <item>20181221</item>
+        <item>20181224</item>
+        <item>20181226</item>
+        <item>20181227</item>
+        <item>20181228</item>
+        <item>20181231</item>
+    </string-array>
+
+    <string-array name="getRevDate_kjs">
+        <item>20181220</item>
+        <item>20181221</item>
+        <item>20181224</item>
+        <item>20181226</item>
+        <item>20181227</item>
+        <item>20181228</item>
+        <item>20181231</item>
+    </string-array>
+
+    <string-array name="getRevTime">
+        <item>0900</item>
+        <item>0954</item>
+        <item>1049</item>
+    </string-array>
+
+</resources>

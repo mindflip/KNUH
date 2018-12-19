@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">경북대학교 병원</string>
-
+    
+    <string name="bicon_home">홈</string>
+    <string name="bicon_reservation">예약</string>
+    <string name="bicon_treat">진료</string>
+    <string name="bicon_ticket">번호표 발급</string>
+    <string name="bicon_pay">결제</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

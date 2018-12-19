@@ -16,27 +16,28 @@
         android:layout_marginTop="50dp"
         app:srcCompat="@drawable/knuhlogo1" />
 
-    <EditText
-        android:id="@+id/etId"
+    <com.beardedhen.androidbootstrap.BootstrapEditText
+        android:id="@+id/etLoginId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
         android:ems="10"
         android:hint="회원번호"
         android:inputType="numberDecimal"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:roundedCorners="true" />
 
-    <EditText
-        android:id="@+id/etPassword"
+    <com.beardedhen.androidbootstrap.BootstrapEditText
+        android:id="@+id/etLoginPw"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
         android:ems="10"
         android:hint="비밀번호"
         android:inputType="numberPassword"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:roundedCorners="true" />
+
 
     <LinearLayout
         android:layout_width="match_parent"

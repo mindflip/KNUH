@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
         android:id="@+id/itTrReserve"
+        android:icon="@drawable/hc_icon_ambulatory"
         android:title="진료 예약"
         android:visible="true" />
+
     <item
         android:id="@+id/itReserveRecord"
+        android:icon="@drawable/hc_icon_ambulatory"
         android:title="예약 조회"
         android:visible="true" />
+
 </menu>

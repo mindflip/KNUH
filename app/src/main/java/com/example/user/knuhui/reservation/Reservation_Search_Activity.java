@@ -1,12 +1,14 @@
 package com.example.user.knuhui.reservation;
 
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.user.knuhui.BottomNaviSet;
 import com.example.user.knuhui.R;
 
 public class Reservation_Search_Activity extends AppCompatActivity {
@@ -14,18 +16,26 @@ public class Reservation_Search_Activity extends AppCompatActivity {
     private ListView listView;
     private Reservation_ListViewAdapter adapter;
 
+    private BottomNavigationView bottomNavigationView;
+    private BottomNaviSet bottomNaviSet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation_search);
 
-        Button button = (Button) findViewById(R.id.button1);
+        android.support.v7.app.ActionBar ab = getSupportActionBar();
+        ab.setTitle("예약 조회");
 
+        bottomNaviSet = new BottomNaviSet(this, this.getClass().getSimpleName());
+        bottomNavigationView = bottomNaviSet.getBottomNavigationView();
+
+        Button button = (Button) findViewById(R.id.btReservationList);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listView = (ListView) findViewById(R.id.listView1);
+                listView = (ListView) findViewById(R.id.lvReservationList);
                 adapter = new Reservation_ListViewAdapter();
 
                 listView.setAdapter(adapter);

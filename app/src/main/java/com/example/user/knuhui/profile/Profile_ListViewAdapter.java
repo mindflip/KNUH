@@ -2,6 +2,7 @@ package com.example.user.knuhui.profile;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,15 +36,15 @@ public class Profile_ListViewAdapter extends BaseAdapter{
             convertView = inflater.inflate(R.layout.setting_item, parent, false);
         }
 
-        TextView textView1 = (TextView)convertView.findViewById(R.id.textview1);
-        ImageView imageView1 = (ImageView)convertView.findViewById(R.id.imageview1);
-
+        ImageView ivListIcon = (ImageView) convertView.findViewById(R.id.ivListIcon);
+        TextView tvListTitle = (TextView)convertView.findViewById(R.id.tvListTitle);
+        ImageView ivListArrow = (ImageView)convertView.findViewById(R.id.ivListArrow);
 
         ProfileItem listViewItem = listViewItemList.get(position);
 
-
-        textView1.setText(listViewItem.getMenu());
-        imageView1.setImageDrawable(listViewItem.getDrawable());
+        ivListIcon.setImageDrawable(listViewItem.getDrawableIcon());
+        tvListTitle.setText(listViewItem.getMenu());
+        ivListArrow.setImageDrawable(listViewItem.getDrawable());
         return convertView;
     }
 
@@ -56,11 +57,12 @@ public class Profile_ListViewAdapter extends BaseAdapter{
         return listViewItemList.get(position) ;
     }
 
-    public void addItem(String menu, Drawable drawable) {
+    public void addItem(Drawable icon, String menu, Drawable arrow) {
         ProfileItem item = new ProfileItem();
 
+        item.setDrawableIcon(icon);
         item.setMenu(menu);
-        item.setDrawable(drawable);
+        item.setDrawable(arrow);
 
         listViewItemList.add(item);
     }

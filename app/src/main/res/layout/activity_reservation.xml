@@ -10,110 +10,165 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp">
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_weight="1"
-            android:text="진료과"/>
+            android:gravity="center"
+            android:text="진료과"
+            android:textStyle="bold" />
+
+        <!--<Spinner-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="5"-->
+            <!--android:id="@+id/spinner1"-->
+            <!--android:entries="@array/dept" />-->
 
         <Spinner
+            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+            android:id="@+id/spDept"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
             android:layout_weight="5"
-            android:id="@+id/spinner1"
-            android:entries="@array/dept" />
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/colorPrimary"
+            android:entries="@array/getRevDept"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_weight="1"
-            android:text="의사"/>
+            android:gravity="center"
+            android:text="의사"
+            android:textStyle="bold" />
 
+        <!--<Spinner-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="5"-->
+            <!--android:id="@+id/spinner2"-->
+            <!--android:entries="@array/doctor" />-->
         <Spinner
+            android:id="@+id/spDoc"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:id="@+id/spinner2"
-            android:entries="@array/doctor" />
+            android:backgroundTint="@color/colorPrimary" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_weight="1"
-            android:text="날짜"/>
+            android:gravity="center"
+            android:text="날짜"
+            android:textStyle="bold" />
+
+        <!--<Spinner-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="2"-->
+            <!--android:id="@+id/spinner3"-->
+            <!--android:entries="@array/year" />-->
+
+        <!--<Spinner-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1.5"-->
+            <!--android:entries="@array/month"/>-->
+
+        <!--<Spinner-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1.5"-->
+            <!--android:entries="@array/day">-->
+
+        <!--</Spinner>-->
 
         <Spinner
+            android:id="@+id/spDate"
             android:layout_width="0dp"
+            android:layout_weight="5"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:id="@+id/spinner3"
-            android:entries="@array/year" />
-
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.5"
-            android:entries="@array/month"/>
-
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.5"
-            android:entries="@array/day">
-
-        </Spinner>
+            android:backgroundTint="@color/colorPrimary"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_weight="1"
-            android:text="시간"/>
+            android:gravity="center"
+            android:text="시간"
+            android:textStyle="bold" />
 
+        <!--<Spinner-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="5"-->
+            <!--android:id="@+id/spinner4"-->
+            <!--android:entries="@array/time" />-->
         <Spinner
+            android:id="@+id/spTime"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
             android:layout_weight="5"
-            android:id="@+id/spinner4"
-            android:entries="@array/time" />
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/colorPrimary"/>
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/tvExpDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*날짜 - 2018 년 12 월 기준" />
+
         <Button
+            android:id="@+id/btReservation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_above="@id/bottom_navigation"
             android:background="@drawable/button_design1"
             android:text="예약하기"
-            android:textColor="#ffffff"
-            android:id="@+id/button1"/>
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:textColor="#ffffff" />
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemBackground="@color/white"
+            android:layout_alignParentBottom="true">
+        </android.support.design.widget.BottomNavigationView>
     </RelativeLayout>
 
 </LinearLayout>

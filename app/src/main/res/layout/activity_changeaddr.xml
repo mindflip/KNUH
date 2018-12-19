@@ -11,36 +11,80 @@
         android:id="@+id/tvAddrTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:layout_weight="0"
-        android:text="현재 주소"
+        android:text="등록된 주소"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="30dp" />
+        android:textSize="30sp"
+        android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/tvAddrNumber"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_height="50dp"
         android:layout_weight="0"
-        android:text="대구광역시 중구 동덕로 130"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="25dp" />
+        android:orientation="horizontal"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/layout_bg1">
 
-    <EditText
-        android:id="@+id/etChangeAddrNumber"
+        <ImageView
+            android:id="@+id/ivAddrHome0"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/hc_bicon_home"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/tvAddrNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="9"
+            android:text="대구광역시 중구 동덕로 130"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_height="50dp"
         android:layout_weight="0"
-        android:ems="10"
-        android:hint="변경할 주소"
-        android:inputType="textPersonName"
-        android:textAlignment="center" />
+        android:orientation="horizontal"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/layout_bg1">
+
+        <ImageView
+            android:id="@+id/ivAddrHome"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/hc_bicon_home"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/etChangeAddrNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="9"
+            android:background="@null"
+            android:ems="10"
+            android:hint="변경할 주소를 입력해주세요!"
+            android:inputType="textPersonName"
+            android:textAlignment="center" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,6 +100,12 @@
             android:text="주소 변경"
             android:background="@drawable/button_design1"
             android:textColor="#ffffff" />
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemBackground="@color/white"></android.support.design.widget.BottomNavigationView>
     </LinearLayout>
 
 </LinearLayout>
