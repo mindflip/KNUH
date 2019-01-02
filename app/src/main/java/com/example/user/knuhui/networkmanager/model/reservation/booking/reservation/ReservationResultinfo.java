@@ -4,13 +4,15 @@ package com.example.user.knuhui.networkmanager.model.reservation.booking.reserva
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
+
+@Root(name = "resultinfo", strict = false)
 public class ReservationResultinfo {
 
-    @SerializedName("result")
-    @Expose
+    @Element
     private ReservationResult result;
-    @SerializedName("message")
-    @Expose
+    @Element
     private ReservationMessage message;
 
     public ReservationResult getResult() {

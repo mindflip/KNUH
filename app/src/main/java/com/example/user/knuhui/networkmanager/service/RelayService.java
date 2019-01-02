@@ -17,6 +17,7 @@ import com.example.user.knuhui.networkmanager.model.userinfo.updateVehicleNo.Upd
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;

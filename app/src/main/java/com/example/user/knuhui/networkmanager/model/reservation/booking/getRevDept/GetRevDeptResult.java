@@ -4,13 +4,15 @@ package com.example.user.knuhui.networkmanager.model.reservation.booking.getRevD
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
+
+@Root(name = "result", strict = false)
 public class GetRevDeptResult {
 
-    @SerializedName("departmentCd")
-    @Expose
+    @Element
     private String departmentCd;
-    @SerializedName("departmentNm")
-    @Expose
+    @Element
     private String departmentNm;
 
     public String getDepartmentCd() {

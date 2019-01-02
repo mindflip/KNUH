@@ -13,20 +13,33 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.knuhui.BottomNaviSet;
 import com.example.user.knuhui.R;
 import com.example.user.knuhui.networkmanager.NetworkManager;
+import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDate.GetRevDate;
+import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDate.GetRevDateResult;
 import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDept.GetRevDept;
 import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDept.GetRevDeptResult;
 import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDoc.GetRevDoc;
+import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDoc.GetRevDocResult;
+import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevTime.GetRevTime;
+import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevTime.GetRevTimeResult;
+import com.example.user.knuhui.networkmanager.model.reservation.booking.reservation.Reservation;
+import com.example.user.knuhui.networkmanager.model.reservation.booking.reservation.ReservationResult;
+import com.example.user.knuhui.networkmanager.model.reservation.search.getRevList.GetRevList;
 import com.example.user.knuhui.networkmanager.model.reservation.search.getRevList.GetRevListResult;
 import com.example.user.knuhui.networkmanager.service.RelayService;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+import okhttp3.HttpUrl;
 import retrofit2.Callback;
 import retrofit2.Response;
 
@@ -37,13 +50,21 @@ public class Reservation_Activity extends AppCompatActivity {
 
     private Spinner spDept, spDoc, spDate, spTime;
     private Spinner spinnerTest;
+    private TextView tvExpDate;
 
-    private NetworkManager getNetworkManager;
-    private NetworkManager postNetworkManager;
+    private NetworkManager networkManager;
     private RelayService relayService;
     private String[] Temp0, Temp1;
 
+    private List<GetRevDateResult> getRevDateResult;
+    private List<GetRevDeptResult> getRevDeptResult;
+    private List<GetRevDocResult> getRevDocResult;
+    private List<GetRevTimeResult> getRevTimeResult;
+//    private ReservationResult reservationResult;
+
     private GetRevListResult getRevListResult;
+
+    private String currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +81,10 @@ public class Reservation_Activity extends AppCompatActivity {
 
         getRevListResult = new GetRevListResult();
 
-        getNetworkManager = new NetworkManager(NetworkManager.RELAY_URL_GET);
-        postNetworkManager = new NetworkManager(NetworkManager.RELAY_URL_POST);
-
-        relayService = getNetworkManager.getRelayService();
+        networkManager = NetworkManager.getInstance();
+        relayService = networkManager.getRelayService();
 
         getRevDept();
-
 
 //        Temp0 = getResources().getStringArray(R.array.getRevDept);
 //        for ( String i : Temp0) {
@@ -78,8 +96,11 @@ public class Reservation_Activity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"예약되었습니다.",Toast.LENGTH_LONG).show();
+
+
+//                Toast.makeText(getApplicationContext(),"예약되었습니다.",Toast.LENGTH_LONG).show();
                 Log.d("Reservation", getRevListResult.toString());
+
             }
         });
     }
@@ -90,93 +111,41 @@ public class Reservation_Activity extends AppCompatActivity {
 
              switch (parent.getId()) {
                 case R.id.spDept :
-                    switch (parent.getItemAtPosition(position).toString()) {
-                        case "방사선종양학과" :
-                            getItem(R.array.getRevDoc_2170000000, spDoc);
-                            break;
-
-                        case "산부인과" :
-                            getItem(R.array.getRevDoc_2100000000, spDoc);
-                            break;
-
-                        case "이비인후과" :
-                            getItem(R.array.getRevDoc_2130000000, spDoc);
-                            break;
-
-                        case "재활의학과" :
-                            getItem(R.array.getRevDoc_2220000000, spDoc);
-                            break;
-
-                        case  "정형외과" :
-                            getItem(R.array.getRevDoc_2050000000, spDoc);
-                            break;
-
-                        case "핵의학과" :
-                            getItem(R.array.getRevDoc_2180000000, spDoc);
-                            break;
-
-                        case "흉부외과" :
-                            getItem(R.array.getRevDoc_2070000000, spDoc);
-                            break;
-                    }
                     getRevListResult.setDepartmentNm(parent.getItemAtPosition(position).toString());
+                    for(int i = 0; i < getRevDeptResult.size(); i++){
+                        if(getRevListResult.getDepartmentNm().equals(getRevDeptResult.get(i).getDepartmentNm())){
+                            getRevListResult.setDepartmentCd(getRevDeptResult.get(i).getDepartmentCd());
+                        }
+                    }
+
+                    getRevDoc();
 
                     break;
 
                 case R.id.spDoc :
-                    switch (parent.getItemAtPosition(position).toString()) {
-                        case "김재철" :
-                            getItem(R.array.getRevDate_kjc, spDate);
-                            break;
-
-                        case "이택후" :
-
-                            break;
-
-                        case "김정수" :
-
-                            break;
-
-                        case "김애령" :
-
-                            break;
-
-                        case "김준우" :
-
-                            break;
-
-                        case "안병철" :
-
-                            break;
-
-                        case "김근직" :
-
-                            break;
-                    }
                     getRevListResult.setDoctorNm(parent.getItemAtPosition(position).toString());
+                    for(int i=0; i < getRevDocResult.size(); i++) {
+                        if(getRevListResult.getDoctorNm().equals(getRevDocResult.get(i).getDoctorNm())){
+                            getRevListResult.setDoctorId(getRevDocResult.get(i).getDoctorId());
+                        }
+                    }
 
+                    Log.d("checkDocId", getRevListResult.getDoctorId());
+                    getRevDate();
                     break;
 
                 case R.id.spDate :
-                    switch (parent.getItemAtPosition(position).toString()) {
-                        case "20181220" :
-                            getItem(R.array.getRevTime, spTime);
-                            break;
-
-                        case "20181221" :
-
-                            break;
-                    }
                     getRevListResult.setDataDate(parent.getItemAtPosition(position).toString());
+                    for(int i=0; i < getRevDateResult.size(); i++) {
+                        if(getRevListResult.getDataDate().equals(getRevDateResult.get(i).getDataDate())){
+                            getRevListResult.setDataDate(getRevDateResult.get(i).getDataDate());
+                        }
+                    }
 
+                    getRevTime();
                     break;
 
                 case R.id.spTime :
-                    switch (parent.getItemAtPosition(position).toString()) {
-                        case "0900" :
-
-                            break;
-                    }
                     getRevListResult.setDataTime(parent.getItemAtPosition(position).toString());
 
                     break;
@@ -204,18 +173,18 @@ public class Reservation_Activity extends AppCompatActivity {
     }
 
     private void getRevDept() {
-        // Service 메서드는 바뀔 수 있음 / 지금은 테스트용
+        // Service 메서드는 바뀔 수 있음 / 지금은 테스트용 (아님)
         retrofit2.Call<GetRevDept> call = relayService.getRevDept();
         call.enqueue(new Callback<GetRevDept>() {
             @Override
             public void onResponse(retrofit2.Call<GetRevDept> call, Response<GetRevDept> response) {
                 if(response.isSuccessful()) {
-                    List<GetRevDeptResult> item = response.body().getResultinfo().getResult();
+                    getRevDeptResult = response.body().getResultinfo().getResult();
                     List<String> spinnerArray =  new ArrayList<String>();
 
-                    for(int i=0; i < item.size(); i++) {
-                        Log.d("resultResp", item.get(i).toString());
-                        spinnerArray.add(item.get(i).getDepartmentNm());
+                    for(int i=0; i < getRevDeptResult.size(); i++) {
+                        Log.d("resultResp", getRevDeptResult.get(i).toString());
+                        spinnerArray.add(getRevDeptResult.get(i).getDepartmentNm());
                     }
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -233,16 +202,142 @@ public class Reservation_Activity extends AppCompatActivity {
         });
     }
 
+    private void getRevDoc() {
+        retrofit2.Call<GetRevDoc> call = relayService.getRevDoc(getRevListResult.getDepartmentCd(), "93888");
+        call.enqueue(new Callback<GetRevDoc>() {
+            @Override
+            public void onResponse(retrofit2.Call<GetRevDoc> call, Response<GetRevDoc> response) {
+                if(response.isSuccessful()) {
+                    getRevDocResult = response.body().getResultinfo().getResult();
+                    List<String> spinnerArray = new ArrayList<>();
+
+                    for(int i=0; i< getRevDocResult.size(); i++) {
+                        Log.d("resultResp", getRevDocResult.get(i).toString());
+                        spinnerArray.add(getRevDocResult.get(i).getDoctorNm());
+                    }
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                            getApplicationContext(), android.R.layout.simple_spinner_item, spinnerArray);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                    spDoc.setAdapter(adapter);
+
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<GetRevDoc> call, Throwable t) {
+                Log.e("Not Response", t.getLocalizedMessage());
+
+            }
+        });
+    }
+
+    private void getRevDate() {
+
+        retrofit2.Call<GetRevDate> call = relayService.getRevDate(getRevListResult.getDepartmentCd(), getRevListResult.getDoctorId(), currentDate);
+
+//        Log.d("checkDocId", getRevListResult.getDoctorId());
+        call.enqueue(new Callback<GetRevDate>() {
+            @Override
+            public void onResponse(retrofit2.Call<GetRevDate> call, Response<GetRevDate> response) {
+                if(response.isSuccessful()) {
+                    getRevDateResult = response.body().getResultinfo().getResult();
+                    List<String> spinnerArray = new ArrayList<>();
+
+                    if (getRevDateResult == null)
+                        return;
+
+                    for(int i=0; i< getRevDateResult.size(); i++) {
+                        Log.d("resultResp", getRevDateResult.get(i).toString());
+                        spinnerArray.add(getRevDateResult.get(i).getDataDate());
+                    }
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                            getApplicationContext(), android.R.layout.simple_spinner_item, spinnerArray);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                    spDate.setAdapter(adapter);
+            }
+        }
+
+            @Override
+            public void onFailure(retrofit2.Call<GetRevDate> call, Throwable t) {
+                Log.e("Not Response", t.getLocalizedMessage());
+            }
+        });
+    }
+
+    private void getRevTime() {
+        retrofit2.Call<GetRevTime> call = relayService.getRevTime(getRevListResult.getDepartmentCd(), getRevListResult.getDoctorId(), getRevListResult.getDataDate(), "93888", "전산실.");
+
+        call.enqueue(new Callback<GetRevTime>() {
+            @Override
+            public void onResponse(retrofit2.Call<GetRevTime> call, Response<GetRevTime> response) {
+                if(response.isSuccessful()) {
+                    getRevTimeResult = response.body().getResultinfo().getResult();
+                    List<String> spinnerArray = new ArrayList<>();
+
+                    if (getRevTimeResult == null)
+                        return;
+
+                    for(int i=0; i< getRevTimeResult.size(); i++) {
+                        Log.d("resultResp", getRevTimeResult.get(i).toString());
+                        spinnerArray.add(getRevTimeResult.get(i).getDataTime());
+                    }
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                            getApplicationContext(), android.R.layout.simple_spinner_item, spinnerArray);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                    spTime.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<GetRevTime> call, Throwable t) {
+                Log.e("Not Response", t.getLocalizedMessage());
+            }
+        });
+    }
+
+    private void reservation() {
+        retrofit2.Call<Reservation> call = relayService.reservation(getRevListResult.getDepartmentCd(), getRevListResult.getDoctorId(), getRevListResult.getDataDate(),
+                "93888", "전산실.", getRevListResult.getDataTime(), "증상입니다");
+
+        call.enqueue(new Callback<Reservation>() {
+            @Override
+            public void onResponse(retrofit2.Call<Reservation> call, Response<Reservation> response) {
+                if(response.isSuccessful()) {
+                    ReservationResult reservationResult = response.body().getResultinfo().getResult();
+
+                    if(reservationResult.getCount() == "1") {
+                        Toast.makeText(getApplicationContext(),"예약되었습니다.",Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(),"서버 문제로 예약에 실패하였습니다.",Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<Reservation> call, Throwable t) {
+                Log.e("Not Response", t.getLocalizedMessage());
+            }
+        });
+    }
+
     private void initLayout() {
         spDept = (Spinner) findViewById(R.id.spDept);
         spDoc = (Spinner) findViewById(R.id.spDoc);
         spDate = (Spinner) findViewById(R.id.spDate);
         spTime = (Spinner) findViewById(R.id.spTime);
+        tvExpDate = (TextView) findViewById(R.id.tvExpDate);
+        currentDate = new SimpleDateFormat("yyyyMM", Locale.getDefault()).format(new Date());
+        tvExpDate.setText("*날짜 - " + currentDate + " 기준");
 
         spDept.setOnItemSelectedListener(onItemSelectedListener);
         spDoc.setOnItemSelectedListener(onItemSelectedListener);
         spDate.setOnItemSelectedListener(onItemSelectedListener);
         spTime.setOnItemSelectedListener(onItemSelectedListener);
-
     }
 }

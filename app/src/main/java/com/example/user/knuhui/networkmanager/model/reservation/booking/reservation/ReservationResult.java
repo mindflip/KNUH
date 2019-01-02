@@ -4,10 +4,13 @@ package com.example.user.knuhui.networkmanager.model.reservation.booking.reserva
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
+
+@Root(name = "result", strict = false)
 public class ReservationResult {
 
-    @SerializedName("count")
-    @Expose
+    @Element
     private String count;
 
     public String getCount() {

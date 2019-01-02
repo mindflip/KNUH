@@ -2,9 +2,11 @@ package com.example.user.knuhui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapEditText;
@@ -24,12 +27,13 @@ public class RoadList_Activity extends AppCompatActivity {
     private BottomNaviSet bottomNaviSet;
 
     private BootstrapEditText etStartPoint, etEndPoint;
+    private ImageView ivLeft, ivLeftDown, ivUp, ivDownLeft;
 
     private Intent intent;
 
     private PathView pathView;
 
-    private Handler handler;
+    private Handler handler, arrowhandler;
 
     private ZoomLayout zoomLayout;
 
@@ -38,7 +42,7 @@ public class RoadList_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_road_list);
 
-        android.support.v7.app.ActionBar ab = getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle("진료실, 검사실 위치 안내");
 
         bottomNaviSet = new BottomNaviSet(this,this.getClass().getSimpleName());
@@ -66,8 +70,49 @@ public class RoadList_Activity extends AppCompatActivity {
             public void run() {
                 testReservDialog();
             }
-        }, 4000);
+        }, 48000);
+
+        arrowhandler = new Handler();
+
+        arrowDelay(ivLeft, 6000);
+        arrowDelay(ivLeftDown,ivLeft, 13000);
+        arrowDelay(ivDownLeft,ivLeftDown, 18000);
+        arrowDelay(ivLeftDown,ivDownLeft, 23000);
+        arrowDelay(ivDownLeft,ivLeftDown, 26000);
+        arrowDelay(ivLeftDown,ivDownLeft, 33000);
+        arrowDelayGone(ivLeftDown, 38000);
+        // 1. 7 / 10 / 13 / 15 / 18
+        // 2.
     }
+
+    private void arrowDelay(final ImageView arrow, int seconds) {
+        arrowhandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                arrow.setVisibility(View.VISIBLE);
+            }
+        }, seconds);
+    }
+
+    private void arrowDelayGone(final ImageView arrow, int seconds) {
+        arrowhandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                arrow.setVisibility(View.GONE);
+            }
+        }, seconds);
+    }
+
+    private void arrowDelay(final ImageView arrow1, final ImageView arrow2, int seconds) {
+        arrowhandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                arrow1.setVisibility(View.VISIBLE);
+                arrow2.setVisibility(View.GONE);
+            }
+        }, seconds);
+    }
+
 
     private void initLayout() {
 
@@ -76,6 +121,11 @@ public class RoadList_Activity extends AppCompatActivity {
         etEndPoint = (BootstrapEditText) findViewById(R.id.etEndPoint);
         etEndPoint.setFocusableInTouchMode(false);
         zoomLayout = (ZoomLayout) findViewById(R.id.zoomLayout);
+
+        ivLeft = (ImageView) findViewById(R.id.ivLeft);
+        ivDownLeft = (ImageView) findViewById(R.id.ivDownLeft);
+        ivUp = (ImageView) findViewById(R.id.ivUp);
+        ivLeftDown = (ImageView) findViewById(R.id.ivLeftDown);
 
         pathView = (PathView) findViewById(R.id.pathView);
         pathView.goToBlood();
@@ -99,7 +149,7 @@ public class RoadList_Activity extends AppCompatActivity {
         alt_bld.setTitle("1건의 검사예약이 있습니다");
         alt_bld.setSingleChoiceItems(testList, -1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-                Toast.makeText(getApplicationContext(), "검사항목 = "+testList[item] + " / " + item, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "검사항목 = "+testList[item] + " / " + item, Toast.LENGTH_SHORT).show();
                 // dialog.cancel();
             }
         });
@@ -115,12 +165,14 @@ public class RoadList_Activity extends AppCompatActivity {
                         etStartPoint.setText("채혈실");
                         etEndPoint.setText("CT촬영실");
 
+                        arrowDelay(ivUp, 1500);
+                        arrowDelayGone(ivUp,6000);
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 completeDialog();
                             }
-                        }, 3000);
+                        }, 10000);
                         dialog.dismiss();
                     }
                 });

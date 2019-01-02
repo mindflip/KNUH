@@ -22,22 +22,22 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="0"
-        android:orientation="horizontal"
+        android:layout_height="150dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/layout_bg1">
+        android:layout_weight="0"
+        android:background="@drawable/layout_bg1"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/ivAddrHome0"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/hc_bicon_home"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/hc_bicon_home" />
 
         <TextView
             android:id="@+id/tvAddrNumber"
@@ -47,7 +47,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="9"
-            android:text="대구광역시 중구 동덕로 130"
+            android:text="주소가 뜨는 곳"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="20sp" />
@@ -60,10 +60,11 @@
         android:orientation="horizontal"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/layout_bg1">
 
         <ImageView
-            android:id="@+id/ivAddrHome"
+            android:id="@+id/ivAddrZipcode"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -72,7 +73,7 @@
             android:layout_marginLeft="10dp"/>
 
         <EditText
-            android:id="@+id/etChangeAddrNumber"
+            android:id="@+id/etChangeZipcode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -81,7 +82,74 @@
             android:layout_weight="9"
             android:background="@null"
             android:ems="10"
-            android:hint="변경할 주소를 입력해주세요!"
+            android:hint="우편번호를 입력해주세요!"
+            android:inputType="textPersonName"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="0"
+        android:background="@drawable/layout_bg1"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivAddrZipcodetxt"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/hc_bicon_home" />
+
+        <EditText
+            android:id="@+id/etChangeZipcodetxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="9"
+            android:background="@null"
+            android:ems="10"
+            android:hint="도로명주소를 입력해주세요!"
+            android:inputType="textPersonName"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_weight="0"
+        android:background="@drawable/layout_bg1"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivAddrHome"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/hc_bicon_home" />
+
+        <EditText
+            android:id="@+id/etChangeAddr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="9"
+            android:background="@null"
+            android:ems="10"
+            android:hint="상세주소를 입력해주세요!"
             android:inputType="textPersonName"
             android:textAlignment="center" />
     </LinearLayout>
@@ -93,7 +161,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btChaneAddrNumber"
+            android:id="@+id/btChangeAddrNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

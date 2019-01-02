@@ -38,7 +38,10 @@ import com.example.user.knuhui.treatment.Treatment_Search_Activity;
 import com.example.user.knuhui.treatment.Wait_Search_Activity;
 import com.google.gson.JsonObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         initPref();
         initLayout();
 
-        networkManager = new NetworkManager(NetworkManager.RELAY_URL_POST);
+        networkManager = NetworkManager.getInstance();
         relayService = networkManager.getRelayService();
 
         introDialog();
@@ -78,95 +81,30 @@ public class MainActivity extends AppCompatActivity {
         pId = intent.getExtras().getString("pId");
         Log.d("getIntent", "/////////////////"+pId);
 
-        callTest3();
+//        callTest3();
 
     }
+
+//    private void callTest3() {
+//        Call<UpdateVehicleNo> call = relayService.updateVehicleNo("93888", "1224");
 //
-//    private void callTest1(){
-//
-//        Call<List<User>> call = relayService.getUsers();
-//
-//        call.enqueue(new Callback<List<User>>() {
+//        call.enqueue(new Callback<UpdateVehicleNo>() {
 //            @Override
-//            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+//            public void onResponse(Call<UpdateVehicleNo> call, Response<UpdateVehicleNo> response) {
 //                if(response.isSuccessful()) {
 //
-//                    List<User> item = response.body();
+//                    UpdateVehicleNoResult item = response.body().getResultinfo().getResult();
 //
-//                    for(int i = 0; i < item.size(); i++) {
-//                        Log.d("usersResponse", item.get(i).toString());
-//                    }
+//                    Log.d("resultResp", item.toString());
+//
 //                }
 //            }
 //
 //            @Override
-//            public void onFailure(Call<List<User>> call, Throwable t) {
+//            public void onFailure(Call<UpdateVehicleNo> call, Throwable t) {
 //                Log.e("Not Response", t.getLocalizedMessage());
 //            }
 //        });
-//    }
-//
-//    private void callTest2() {
-//        Call<GetRevDept> call = relayService.getResults();
-//
-//        call.enqueue(new Callback<GetRevDept>() {
-//            @Override
-//            public void onResponse(Call<GetRevDept> call, Response<GetRevDept> response) {
-//                if(response.isSuccessful()) {
-//                    List<GetRevDeptResult> item = response.body().getResultinfo().getResult();
-//
-//                    for(int i=0; i < item.size(); i++) {
-//                        Log.d("resultResp", item.get(i).toString());
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<GetRevDept> call, Throwable t) {
-//                Log.e("Not Response", t.getLocalizedMessage());
-//            }
-//        });
-//
-//    }
-//
-    private void callTest3() {
-        Call<UpdateVehicleNo> call = relayService.updateVehicleNo("93888", "1224");
-
-        call.enqueue(new Callback<UpdateVehicleNo>() {
-            @Override
-            public void onResponse(Call<UpdateVehicleNo> call, Response<UpdateVehicleNo> response) {
-                if(response.isSuccessful()) {
-
-                    UpdateVehicleNoResult item = response.body().getResultinfo().getResult();
-
-                    Log.d("resultResp", item.toString());
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UpdateVehicleNo> call, Throwable t) {
-                Log.e("Not Response", t.getLocalizedMessage());
-            }
-        });
-    }
-//
-//    private void callTest4() {
-//        Call<GetRevDept> call = relayService.getRevDept();
-//
-//        call.enqueue(new Callback<GetRevDept>() {
-//            @Override
-//            public void onResponse(Call<GetRevDept> call, Response<GetRevDept> response) {
-//                Log.d("a","b");
-//            }
-//
-//            @Override
-//            public void onFailure(Call<GetRevDept> call, Throwable t) {
-//                Log.e("Not Response", t.getLocalizedMessage());
-//
-//            }
-//        });
-//
 //    }
 
     private void initPref() {
@@ -218,8 +156,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.ivTicket :
-                    intent = new Intent(MainActivity.this, Ticket_Activity.class);
-                    startActivity(intent);
+//                    intent = new Intent(MainActivity.this, Ticket_Activity.class);
+//                    startActivity(intent);
+                    callDialog("번호표 발급");
+//                    callTest3();
                     break;
 
                 case R.id.ivTreatment :
@@ -227,6 +167,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.ivPayment :
+                    callWaiting("결제","서비스 준비 중입니다." );
+
                     break;
 
                 case R.id.ivCall :
@@ -272,8 +214,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.itWaiting:
-                        intent = new Intent(MainActivity.this, Wait_Search_Activity.class);
-                        startActivity(intent);
+//                        intent = new Intent(MainActivity.this, Wait_Search_Activity.class);
+//                        startActivity(intent);
+                        callWaiting("진료대기시간 조회","서비스 준비 중입니다." );
                         break;
 
                     case R.id.itTrRecord:
@@ -306,7 +249,20 @@ public class MainActivity extends AppCompatActivity {
     private void callDialog(String title){
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle(title);
-        alertDialog.setMessage("입원환자가 아닙니다.");
+        alertDialog.setMessage("내원상태에서만 서비스가 제공됩니다.");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    private void callWaiting(String title, String Message){
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(Message);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -319,12 +275,12 @@ public class MainActivity extends AppCompatActivity {
     private void introDialog() {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("내원 알림");
-        alertDialog.setMessage("내원을 환영합니다.");
+        alertDialog.setMessage("현재 내원 상태가 아니라 서비스 이용에 제한이 있습니다.");
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "닫기",
                 new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        noticeDialog();
+                        dialog.dismiss();
                     }
                 });
         alertDialog.show();
@@ -352,7 +308,7 @@ public class MainActivity extends AppCompatActivity {
         alt_bld.setTitle("2건의 검사예약이 있습니다");
         alt_bld.setSingleChoiceItems(testList, -1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-                Toast.makeText(getApplicationContext(), "검사항목 = "+testList[item] + " / " + item, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "검사항목 = "+testList[item] + " / " + item, Toast.LENGTH_SHORT).show();
                 // dialog.cancel();
                 dialogItem = item;
 

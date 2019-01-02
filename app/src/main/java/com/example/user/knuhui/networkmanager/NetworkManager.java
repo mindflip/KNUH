@@ -2,23 +2,25 @@ package com.example.user.knuhui.networkmanager;
 
 import com.example.user.knuhui.BuildConfig;
 import com.example.user.knuhui.networkmanager.service.RelayService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 public class NetworkManager {
 
     public static final String TEST_IP = "http://192.168.0.39:3000";
-    public static final String RELAY_URL_GET = "https://navi.knuh.kr/knuh/";
-    public static final String RELAY_URL_POST = "https://navi.knuh.kr/knuh/";
+    public static final String RELAY_URL = "https://navi.knuh.kr/knuh02/";
 
-    private NetworkManager instance = null;
-    private RelayService relayService;
+    private static NetworkManager instance = null;
+    private static RelayService relayService;
     private Retrofit retrofit;
 
-    public NetworkManager(String baseUrl) {
+    private NetworkManager() {
 
         OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
 
@@ -29,16 +31,28 @@ public class NetworkManager {
             okHttpBuilder.addInterceptor(loggingInterceptor);
         }
 
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
         retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(RELAY_URL)
+//                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(SimpleXmlConverterFactory.create())
                 .client(okHttpBuilder.build())
                 .build();
 
         relayService = retrofit.create(RelayService.class);
     }
 
-    public RelayService getRelayService() {
+    public static NetworkManager getInstance() {
+        if (instance == null) {
+            instance = new NetworkManager();
+        }
+        return instance;
+    }
+
+    public static RelayService getRelayService() {
         return relayService;
     }
 }

@@ -75,32 +75,78 @@
             android:text="검색"
             android:textColor="#ffffff" />
     </LinearLayout>
-    <com.otaliastudios.zoom.ZoomLayout
-        android:id="@+id/zoomLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical|horizontal"
-        app:overScrollHorizontal="true"
-        app:overScrollVertical="true"
-        app:overPinchable="true"
-        app:horizontalPanEnabled="true"
-        app:verticalPanEnabled="true"
-        app:zoomEnabled="true"
-        app:minZoom="0.7"
-        app:minZoomType="zoom"
-        app:maxZoom="3.0"
-        app:maxZoomType="zoom"
-        app:hasClickableChildren="false">
 
-        <!-- Content here. -->
-        <com.example.user.knuhui.PathView
-            android:id="@+id/pathView"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.otaliastudios.zoom.ZoomLayout
+            android:id="@+id/zoomLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/knuh_floor1" />
+            android:scrollbars="vertical|horizontal"
+            app:hasClickableChildren="false"
+            app:horizontalPanEnabled="true"
+            app:maxZoom="3.0"
+            app:maxZoomType="zoom"
+            app:minZoom="0.7"
+            app:minZoomType="zoom"
+            app:overPinchable="true"
+            app:overScrollHorizontal="true"
+            app:overScrollVertical="true"
+            app:verticalPanEnabled="true"
+            app:zoomEnabled="true">
 
-    </com.otaliastudios.zoom.ZoomLayout>
+            <!-- Content here. -->
+            <com.example.user.knuhui.PathView
+                android:id="@+id/pathView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/knuh_floor1" />
+
+        </com.otaliastudios.zoom.ZoomLayout>
+
+        <ImageView
+            android:id="@+id/ivLeftDown"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="30dp"
+
+            android:layout_gravity="left|top"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_ldown" />
+
+        <ImageView
+            android:id="@+id/ivLeft"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="30dp"
+
+            android:layout_gravity="left|top"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_left" />
+
+        <ImageView
+            android:id="@+id/ivDownLeft"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="30dp"
+
+            android:layout_gravity="left|top"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_dleft" />
+
+        <ImageView
+            android:id="@+id/ivUp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="30dp"
+            android:layout_gravity="left|top"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_up" />
+
+    </FrameLayout>
 
 
     <android.support.design.widget.BottomNavigationView

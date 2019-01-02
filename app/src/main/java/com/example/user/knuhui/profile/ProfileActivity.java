@@ -38,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
         lvProfile = (ListView) findViewById(R.id.lvProfile);
         lvProfile.setAdapter(adapter);
         adapter.addItem(ContextCompat.getDrawable(this, R.drawable.hc_icon_consent), "동의서 조회", ContextCompat.getDrawable(this, R.drawable.arrow));
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.hc_icon_pw),"회원정보 조회 및 비밀번호 변경", ContextCompat.getDrawable(this, R.drawable.arrow));
+        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.hc_icon_pw),"회원정보 조회", ContextCompat.getDrawable(this, R.drawable.arrow));
         adapter.addItem(ContextCompat.getDrawable(this, R.drawable.hc_icon_carnum),"차량번호 변경", ContextCompat.getDrawable(this, R.drawable.arrow));
         adapter.addItem(ContextCompat.getDrawable(this, R.drawable.hc_icon_pnum),"휴대전화번호 변경", ContextCompat.getDrawable(this, R.drawable.arrow));
         adapter.addItem(ContextCompat.getDrawable(this, R.drawable.hc_icon_addr),"주소 변경", ContextCompat.getDrawable(this, R.drawable.arrow));

@@ -5,25 +5,23 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
+
+@Root(name = "result", strict = false)
 public class GetRevTimeResult {
 
-    @SerializedName("dataTime")
-    @Expose
+    @Element
     private String dataTime;
-    @SerializedName("firstReservCnt")
-    @Expose
+    @Element
     private List<Object> firstReservCnt = null;
-    @SerializedName("secondReservCnt")
-    @Expose
+    @Element
     private List<Object> secondReservCnt = null;
-    @SerializedName("availReservCnt")
-    @Expose
+    @Element
     private String availReservCnt;
-    @SerializedName("firstAvailReservCnt")
-    @Expose
+    @Element
     private String firstAvailReservCnt;
-    @SerializedName("secondAvailReservCnt")
-    @Expose
+    @Element
     private String secondAvailReservCnt;
 
     public String getDataTime() {

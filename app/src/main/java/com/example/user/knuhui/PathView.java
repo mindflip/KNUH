@@ -77,7 +77,7 @@ public class PathView extends View {
         float[] intervals = new float[]{length, length};
 
         ObjectAnimator animator = ObjectAnimator.ofFloat(PathView.this, "phase", 1.0f, 0.0f);
-        animator.setDuration(2000);
+        animator.setDuration(45000);
         animator.start();
 
     }
@@ -147,7 +147,7 @@ public class PathView extends View {
         float[] intervals = new float[]{length, length};
 
         ObjectAnimator ctAnimator = ObjectAnimator.ofFloat(PathView.this, "phase", 1.0f, 0.0f);
-        ctAnimator.setDuration(3000);
+        ctAnimator.setDuration(7000);
         ctAnimator.start();
 
     }
