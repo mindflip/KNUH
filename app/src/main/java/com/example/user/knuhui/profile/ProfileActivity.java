@@ -43,7 +43,6 @@ public class ProfileActivity extends AppCompatActivity {
         adapter.addItem(ContextCompat.getDrawable(this, R.drawable.hc_icon_pnum),"휴대전화번호 변경", ContextCompat.getDrawable(this, R.drawable.arrow));
         adapter.addItem(ContextCompat.getDrawable(this, R.drawable.hc_icon_addr),"주소 변경", ContextCompat.getDrawable(this, R.drawable.arrow));
 
-
         lvProfile.setOnItemClickListener(onItemClickListener);
     }
 
@@ -75,6 +74,4 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
     };
-
-
 }

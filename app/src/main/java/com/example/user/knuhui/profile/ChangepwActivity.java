@@ -72,7 +72,7 @@ public class ChangepwActivity extends AppCompatActivity {
                     tvUserPhone.setText(item.getCellphoneNo());
                     tvUserId.setText(item.getPId());
                     tvUserGender.setText(item.getGenderCd());
-                    tvUserAddr.setText(item.getZipCode() + " / " + item.getZipCodeTxt());
+                    tvUserAddr.setText(item.getZipCode() + " / " + item.getZipCodeTxt() + " " + item.getAddress());
                 }
             }
 

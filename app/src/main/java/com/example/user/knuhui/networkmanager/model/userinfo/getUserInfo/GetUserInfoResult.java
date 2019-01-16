@@ -4,37 +4,31 @@ package com.example.user.knuhui.networkmanager.model.userinfo.getUserInfo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
+
+@Root(name = "result", strict = false)
 public class GetUserInfoResult {
 
-    @SerializedName("birthDt")
-    @Expose
+    @Element
     private String birthDt;
-    @SerializedName("pNm")
-    @Expose
+    @Element
     private String pNm;
-    @SerializedName("cellphoneNo")
-    @Expose
+    @Element
     private String cellphoneNo;
-    @SerializedName("pId")
-    @Expose
+    @Element
     private String pId;
-    @SerializedName("genderCd")
-    @Expose
+    @Element
     private String genderCd;
-    @SerializedName("inHospitalYn")
-    @Expose
+    @Element
     private String inHospitalYn;
-    @SerializedName("vehicleNo")
-    @Expose
+    @Element
     private String vehicleNo;
-    @SerializedName("zipCode")
-    @Expose
+    @Element
     private String zipCode;
-    @SerializedName("zipCodeTxt")
-    @Expose
+    @Element
     private String zipCodeTxt;
-    @SerializedName("address")
-    @Expose
+    @Element
     private String address;
 
     public String getBirthDt() {

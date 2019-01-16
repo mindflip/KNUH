@@ -8,21 +8,21 @@
     tools:context=".history.History1_Activity">
 
     <ListView
+        android:id="@+id/lvGetOutList"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:layout_weight="9"
-        android:id="@+id/listView1">
+        android:layout_weight="9">
 
     </ListView>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btGetOutList"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_weight="1"
         android:background="@drawable/button_design1"
-        android:textColor="#ffffff"
-        android:text="진료이력조회(외래)"/>
+        android:text="진료이력조회(외래)"
+        android:textColor="#ffffff" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"

@@ -168,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.ivPayment :
                     callWaiting("결제","서비스 준비 중입니다." );
-
                     break;
 
                 case R.id.ivCall :
@@ -196,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Intent intent;
-                Toast.makeText(getApplicationContext(), "팝업메뉴 이벤트 처리 - " + item.getTitle(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "팝업메뉴 이벤트 처리 - " + item.getTitle(),Toast.LENGTH_SHORT).show();
                 switch (item.getItemId()){
                     case R.id.itTrReserve:
                         intent = new Intent(MainActivity.this, Reservation_Activity.class);

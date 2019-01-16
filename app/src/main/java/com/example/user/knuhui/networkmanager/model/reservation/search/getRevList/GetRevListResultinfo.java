@@ -5,14 +5,17 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Root;
+
+@Root(name = "resultinfo", strict = false)
 public class GetRevListResultinfo {
 
-    @SerializedName("result")
-    @Expose
-    private List<GetRevListResult> result = null;
-    @SerializedName("message")
-    @Expose
-    private GetRevListMessage message;
+    @ElementList(inline = true)
+    private List<GetRevListResult> result;
+    @Element
+    private GetRevListResultKM resultKM;
 
     public List<GetRevListResult> getResult() {
         return result;
@@ -22,12 +25,11 @@ public class GetRevListResultinfo {
         this.result = result;
     }
 
-    public GetRevListMessage getMessage() {
-        return message;
+    public GetRevListResultKM getResultKM() {
+        return resultKM;
     }
 
-    public void setMessage(GetRevListMessage message) {
-        this.message = message;
+    public void setResultKM(GetRevListResultKM resultKM) {
+        this.resultKM = resultKM;
     }
-
 }

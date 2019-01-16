@@ -4,13 +4,13 @@ package com.example.user.knuhui.networkmanager.model.reservation.search.putRevCa
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 @Root(name = "root", strict = false)
 public class PutRevCancel {
 
-    @SerializedName("resultinfo")
-    @Expose
+    @Element
     private PutRevCancelResultinfo resultinfo;
 
     public PutRevCancelResultinfo getResultinfo() {

@@ -18,7 +18,7 @@ public class GetRevDocResult {
     private String departmentCd;
     @Element
     private String specYn;
-    @Element
+    @Element(required = false)
     private String majorField;
 
     public String getDoctorId() {

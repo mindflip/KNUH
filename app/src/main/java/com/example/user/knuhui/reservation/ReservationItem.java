@@ -5,6 +5,7 @@ public class ReservationItem {
     private String doctor;
     private String date;
     private String time;
+    private String receiptGubunKindNm;
 
     public void setDept(String dept){
         this.dept = dept;
@@ -37,4 +38,13 @@ public class ReservationItem {
     public String getTime() {
         return time;
     }
+
+    public String getReceiptGubunKindNm() {
+        return receiptGubunKindNm;
+    }
+
+    public void setReceiptGubunKindNm(String receiptGubunKindNm) {
+        this.receiptGubunKindNm = receiptGubunKindNm;
+    }
+
 }

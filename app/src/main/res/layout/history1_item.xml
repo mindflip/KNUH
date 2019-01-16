@@ -10,46 +10,64 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tvTreatHistDeptTitle"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:text="진료과"
+            android:textSize="20dp"
             android:gravity="center"
+            android:textColor="@color/menu_black"
+            android:text="진료과 :" />
 
-            />
         <TextView
+            android:id="@+id/tvTreatHistDocTitle"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:text="의사"
-            android:gravity="center"/>
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@color/menu_black"
+            android:text="의사 :" />
+
         <TextView
+            android:id="@+id/tvTreatHistDateTitle"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:text="날짜"
-            android:gravity="center"/>
-
-
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@color/menu_black"
+            android:text="날짜 :" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="4"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp">
 
         <TextView
+            android:id="@+id/tvTreatHistDept"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:id="@+id/dept"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:textColor="@color/color_bmenu2"
+            android:text="테스트" />
+
         <TextView
+            android:id="@+id/tvTreatHistDoc"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:id="@+id/doctor"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical"
+            android:text="테스트"
+            android:textColor="@color/menu_black"
+            android:textSize="20dp" />
+
         <TextView
+            android:id="@+id/tvTreatHistDate"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:id="@+id/date"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical"
+            android:textColor="@color/menu_black"
+            android:textSize="20dp" />
     </LinearLayout>
 </LinearLayout>

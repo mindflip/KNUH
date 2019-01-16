@@ -2,8 +2,6 @@
 package com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDate;
 
 import java.util.List;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
@@ -14,8 +12,10 @@ public class GetRevDateResultinfo {
 
     @ElementList(inline = true, required = false)
     private List<GetRevDateResult> result = null;
+    @Element(required = false)
+    private GetRevDateEtcmsg etcmsg;
     @Element
-    private GetRevDateMessage message;
+    private GetRevDateResultKM resultKM;
 
     public List<GetRevDateResult> getResult() {
         return result;
@@ -25,12 +25,19 @@ public class GetRevDateResultinfo {
         this.result = result;
     }
 
-    public GetRevDateMessage getMessage() {
-        return message;
+    public GetRevDateResultKM getResultKM() {
+        return resultKM;
     }
 
-    public void setMessage(GetRevDateMessage message) {
-        this.message = message;
+    public void setResultKM(GetRevDateResultKM resultKM) {
+        this.resultKM = resultKM;
     }
 
+    public GetRevDateEtcmsg getEtcmsg() {
+        return etcmsg;
+    }
+
+    public void setEtcmsg(GetRevDateEtcmsg etcmsg) {
+        this.etcmsg = etcmsg;
+    }
 }

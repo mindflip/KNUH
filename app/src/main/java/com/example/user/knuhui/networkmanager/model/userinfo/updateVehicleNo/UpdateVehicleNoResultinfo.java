@@ -1,17 +1,18 @@
 
 package com.example.user.knuhui.networkmanager.model.userinfo.updateVehicleNo;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.example.user.knuhui.networkmanager.model.userinfo.updateTelNo.UpdateVehicleNoResultKM;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
+
+@Root(name = "resultinfo", strict = false)
 public class UpdateVehicleNoResultinfo {
 
-    @SerializedName("result")
-    @Expose
+    @Element
     private UpdateVehicleNoResult result;
-    @SerializedName("message")
-    @Expose
-    private UpdateVehicleNoMessage message;
+    @Element
+    private UpdateVehicleNoResultKM resultKM;
 
     public UpdateVehicleNoResult getResult() {
         return result;
@@ -21,12 +22,11 @@ public class UpdateVehicleNoResultinfo {
         this.result = result;
     }
 
-    public UpdateVehicleNoMessage getMessage() {
-        return message;
+    public UpdateVehicleNoResultKM getResultKM() {
+        return resultKM;
     }
 
-    public void setMessage(UpdateVehicleNoMessage message) {
-        this.message = message;
+    public void setResultKM(UpdateVehicleNoResultKM resultKM) {
+        this.resultKM = resultKM;
     }
-
 }

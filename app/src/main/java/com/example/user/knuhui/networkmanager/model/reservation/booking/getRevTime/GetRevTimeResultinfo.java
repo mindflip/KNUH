@@ -15,7 +15,7 @@ public class GetRevTimeResultinfo {
     @ElementList(inline = true, required = false)
     private List<GetRevTimeResult> result = null;
     @Element
-    private GetRevTimeMessage message;
+    private GetRevTimeResultKM resultKM;
 
     public List<GetRevTimeResult> getResult() {
         return result;
@@ -25,12 +25,11 @@ public class GetRevTimeResultinfo {
         this.result = result;
     }
 
-    public GetRevTimeMessage getMessage() {
-        return message;
+    public GetRevTimeResultKM getResultKM() {
+        return resultKM;
     }
 
-    public void setMessage(GetRevTimeMessage message) {
-        this.message = message;
+    public void setResultKM(GetRevTimeResultKM resultKM) {
+        this.resultKM = resultKM;
     }
-
 }

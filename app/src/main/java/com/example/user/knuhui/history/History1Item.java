@@ -4,6 +4,7 @@ public class History1Item {
     private String dept;
     private String doctor;
     private String date;
+    private String time;
 
     public void setDate(String date) {
         this.date = date;
@@ -27,5 +28,13 @@ public class History1Item {
 
     public String getDoctor() {
         return doctor;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

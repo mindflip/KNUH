@@ -40,9 +40,10 @@
         <activity android:name=".reservation.Reservation_Activity" />
         <activity android:name=".history.History_Search_Activity" />
         <activity android:name=".ticket.Ticket_Activity" />
-        <activity android:name=".dicom.android.dicomviewer.DICOMViewer"
-            android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-
+        <activity
+            android:name=".dicom.android.dicomviewer.DICOMViewer"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity android:name=".dicom.android.dicomviewer.DICOMFileChooser"/>
     </application>

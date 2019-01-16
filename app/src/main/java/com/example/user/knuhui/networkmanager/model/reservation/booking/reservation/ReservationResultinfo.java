@@ -1,9 +1,6 @@
 
 package com.example.user.knuhui.networkmanager.model.reservation.booking.reservation;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
@@ -13,7 +10,7 @@ public class ReservationResultinfo {
     @Element
     private ReservationResult result;
     @Element
-    private ReservationMessage message;
+    private ReservationResultKM resultKM;
 
     public ReservationResult getResult() {
         return result;
@@ -23,12 +20,11 @@ public class ReservationResultinfo {
         this.result = result;
     }
 
-    public ReservationMessage getMessage() {
-        return message;
+    public ReservationResultKM getResultKM() {
+        return resultKM;
     }
 
-    public void setMessage(ReservationMessage message) {
-        this.message = message;
+    public void setResultKM(ReservationResultKM resultKM) {
+        this.resultKM = resultKM;
     }
-
 }

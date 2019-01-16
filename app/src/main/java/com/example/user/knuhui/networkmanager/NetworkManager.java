@@ -14,7 +14,7 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 public class NetworkManager {
 
     public static final String TEST_IP = "http://192.168.0.39:3000";
-    public static final String RELAY_URL = "https://navi.knuh.kr/knuh02/";
+    public static final String RELAY_URL = "https://navi.knuh.kr/knuh13/";
 
     private static NetworkManager instance = null;
     private static RelayService relayService;

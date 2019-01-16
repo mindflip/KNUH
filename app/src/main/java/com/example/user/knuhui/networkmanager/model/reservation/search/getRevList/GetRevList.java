@@ -4,13 +4,13 @@ package com.example.user.knuhui.networkmanager.model.reservation.search.getRevLi
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 @Root(name = "root", strict = false)
 public class GetRevList {
 
-    @SerializedName("resultinfo")
-    @Expose
+    @Element
     private GetRevListResultinfo resultinfo;
 
     public GetRevListResultinfo getResultinfo() {

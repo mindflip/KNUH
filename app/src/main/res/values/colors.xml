@@ -6,4 +6,5 @@
     <color name="white">#ffffff</color>
     <color name="color_bmenu1">#DB1F12</color>
     <color name="color_bmenu2">#fcda00</color>
+    <color name="menu_black">#000000</color>
 </resources>

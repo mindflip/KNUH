@@ -4,14 +4,16 @@ package com.example.user.knuhui.networkmanager.model.reservation.search.putRevCa
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
+
+@Root(name = "resultinfo", strict = false)
 public class PutRevCancelResultinfo {
 
-    @SerializedName("result")
-    @Expose
+    @Element
     private PutRevCancelResult result;
-    @SerializedName("message")
-    @Expose
-    private PutRevCancelMessage message;
+    @Element
+    private PutRevCancelResultKM resultKM;
 
     public PutRevCancelResult getResult() {
         return result;
@@ -21,12 +23,11 @@ public class PutRevCancelResultinfo {
         this.result = result;
     }
 
-    public PutRevCancelMessage getMessage() {
-        return message;
+    public PutRevCancelResultKM getResultKM() {
+        return resultKM;
     }
 
-    public void setMessage(PutRevCancelMessage message) {
-        this.message = message;
+    public void setResultKM(PutRevCancelResultKM resultKM) {
+        this.resultKM = resultKM;
     }
-
 }

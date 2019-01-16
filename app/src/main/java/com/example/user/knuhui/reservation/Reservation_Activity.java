@@ -1,9 +1,11 @@
 package com.example.user.knuhui.reservation;
 
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.telecom.Call;
 import android.util.Log;
@@ -17,9 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.knuhui.BottomNaviSet;
+import com.example.user.knuhui.MainActivity;
 import com.example.user.knuhui.R;
 import com.example.user.knuhui.networkmanager.NetworkManager;
 import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDate.GetRevDate;
+import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDate.GetRevDateEtcmsg;
 import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDate.GetRevDateResult;
 import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDept.GetRevDept;
 import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDept.GetRevDeptResult;
@@ -51,6 +55,7 @@ public class Reservation_Activity extends AppCompatActivity {
     private Spinner spDept, spDoc, spDate, spTime;
     private Spinner spinnerTest;
     private TextView tvExpDate;
+    private Button btReservation;
 
     private NetworkManager networkManager;
     private RelayService relayService;
@@ -90,19 +95,19 @@ public class Reservation_Activity extends AppCompatActivity {
 //        for ( String i : Temp0) {
 //            Log.d("StringArrayRes", "///////////    " + i);
 //        }
-
-        Button button = (Button)findViewById(R.id.btReservation);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-//                Toast.makeText(getApplicationContext(),"예약되었습니다.",Toast.LENGTH_LONG).show();
-                Log.d("Reservation", getRevListResult.toString());
-
-            }
-        });
+//
+//        Button button = (Button)findViewById(R.id.btReservation);
+//
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+////                Toast.makeText(getApplicationContext(),"예약되었습니다.",Toast.LENGTH_LONG).show();
+//                Log.d("Reservation", getRevListResult.toString());
+//
+//            }
+//        });
     }
 
     Spinner.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
@@ -198,11 +203,14 @@ public class Reservation_Activity extends AppCompatActivity {
             @Override
             public void onFailure(retrofit2.Call<GetRevDept> call, Throwable t) {
                 Log.e("Not Response", t.getLocalizedMessage());
+                Toast.makeText(getApplicationContext(), "서버와 연결이 불안정합니다.\n해당 화면에 다시 접속해주세요.", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void getRevDoc() {
+        spDate.setAdapter(null);
+        spTime.setAdapter(null);
         retrofit2.Call<GetRevDoc> call = relayService.getRevDoc(getRevListResult.getDepartmentCd(), "93888");
         call.enqueue(new Callback<GetRevDoc>() {
             @Override
@@ -234,6 +242,7 @@ public class Reservation_Activity extends AppCompatActivity {
     }
 
     private void getRevDate() {
+        spTime.setAdapter(null);
 
         retrofit2.Call<GetRevDate> call = relayService.getRevDate(getRevListResult.getDepartmentCd(), getRevListResult.getDoctorId(), currentDate);
 
@@ -245,8 +254,13 @@ public class Reservation_Activity extends AppCompatActivity {
                     getRevDateResult = response.body().getResultinfo().getResult();
                     List<String> spinnerArray = new ArrayList<>();
 
-                    if (getRevDateResult == null)
+                    if (getRevDateResult == null) {
+                        GetRevDateEtcmsg getRevDateEtcmsg = response.body().getResultinfo().getEtcmsg();
+                        Log.d("checkErrorMsg", getRevDateEtcmsg.getErrormsg());
+                        errorDialog("날짜 선택", getRevDateEtcmsg.getErrormsg());
                         return;
+                    }
+
 
                     for(int i=0; i< getRevDateResult.size(); i++) {
                         Log.d("resultResp", getRevDateResult.get(i).toString());
@@ -311,7 +325,7 @@ public class Reservation_Activity extends AppCompatActivity {
                 if(response.isSuccessful()) {
                     ReservationResult reservationResult = response.body().getResultinfo().getResult();
 
-                    if(reservationResult.getCount() == "1") {
+                    if(reservationResult.getCount().equals("1")) {
                         Toast.makeText(getApplicationContext(),"예약되었습니다.",Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(),"서버 문제로 예약에 실패하였습니다.",Toast.LENGTH_LONG).show();
@@ -326,6 +340,20 @@ public class Reservation_Activity extends AppCompatActivity {
         });
     }
 
+    private void errorDialog(String title, String message) {
+        AlertDialog alertDialog = new AlertDialog.Builder(Reservation_Activity.this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "닫기",
+                new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
     private void initLayout() {
         spDept = (Spinner) findViewById(R.id.spDept);
         spDoc = (Spinner) findViewById(R.id.spDoc);
@@ -334,10 +362,19 @@ public class Reservation_Activity extends AppCompatActivity {
         tvExpDate = (TextView) findViewById(R.id.tvExpDate);
         currentDate = new SimpleDateFormat("yyyyMM", Locale.getDefault()).format(new Date());
         tvExpDate.setText("*날짜 - " + currentDate + " 기준");
+        btReservation = (Button) findViewById(R.id.btReservation);
 
+        btReservation.setOnClickListener(onClickListener);
         spDept.setOnItemSelectedListener(onItemSelectedListener);
         spDoc.setOnItemSelectedListener(onItemSelectedListener);
         spDate.setOnItemSelectedListener(onItemSelectedListener);
         spTime.setOnItemSelectedListener(onItemSelectedListener);
     }
+
+    Button.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            reservation();
+        }
+    };
 }

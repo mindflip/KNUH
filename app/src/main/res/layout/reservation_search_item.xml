@@ -11,28 +11,49 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tvRevHistDeptTitle"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:text="진료과"
             android:gravity="center"
-
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:text="의사"
-            android:gravity="center"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:text="날짜"
-            android:gravity="center"/>
+            android:text="진료과 :"
+            android:textColor="@color/menu_black"
+            android:textSize="20dp" />
 
         <TextView
+            android:id="@+id/tvRevHistDocTitle"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:text="시간"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="의사 :"
+            android:textColor="@color/menu_black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/tvRevHistDateTitle"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:text="날짜 :"
+            android:textColor="@color/menu_black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/tvRevHistTimeTitle"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:text="시간 :"
+            android:textColor="@color/menu_black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/tvRevHistKindTitle"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:text="구분 :"
+            android:textColor="@color/menu_black"
+            android:textSize="20dp" />
 
     </LinearLayout>
 
@@ -40,35 +61,48 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="4"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp">
 
         <TextView
+            android:id="@+id/tvRevHistDept"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:id="@+id/dept"
-            android:gravity="center_vertical"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:id="@+id/doctor"
-            android:gravity="center_vertical"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:id="@+id/date"
-            android:gravity="center_vertical"/>
+            android:textSize="20dp"
+            android:textColor="@color/color_bmenu2"
+            android:gravity="center_vertical" />
 
         <TextView
+            android:id="@+id/tvRevHistDoc"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:id="@+id/time"
-            android:gravity="center_vertical"/>
+            android:textSize="20dp"
+            android:textColor="@color/menu_black"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/tvRevHistDate"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="20dp"
+            android:textColor="@color/menu_black"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/tvRevHistTime"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="20dp"
+            android:textColor="@color/menu_black"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/tvRevHistKind"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="20dp"
+            android:textColor="@color/menu_black"
+            android:gravity="center_vertical" />
     </LinearLayout>
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemBackground="@color/white">
-    </android.support.design.widget.BottomNavigationView>
 </LinearLayout>
 

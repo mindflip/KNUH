@@ -1,6 +1,8 @@
 package com.example.user.knuhui.profile;
 
+import android.content.DialogInterface;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,7 @@ import com.example.user.knuhui.networkmanager.model.userinfo.getUserInfo.GetUser
 import com.example.user.knuhui.networkmanager.model.userinfo.updateAddress.UpdateAddress;
 import com.example.user.knuhui.networkmanager.model.userinfo.updateAddress.UpdateAddressResult;
 import com.example.user.knuhui.networkmanager.service.RelayService;
+import com.example.user.knuhui.reservation.Reservation_Activity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -83,11 +86,16 @@ public class ChangeaddrActivity extends AppCompatActivity {
                             public void onResponse(Call<UpdateAddress> call, Response<UpdateAddress> response) {
                                 UpdateAddressResult result = response.body().getResultinfo().getResult();
                                 Log.d("updateSuccess", result.toString());
+                                if(result.getCount().equals("1")){
+                                    noticeDialog("", "주소를 등록하였습니다.");
+                                    callUserAddr();
+                                }
                             }
 
                             @Override
                             public void onFailure(Call<UpdateAddress> call, Throwable t) {
                                 Log.e("Not Response", t.getLocalizedMessage());
+                                noticeDialog("서버연결 오류","주소를 다시 전송해주세요.");
                             }
                         });
                     }
@@ -115,5 +123,19 @@ public class ChangeaddrActivity extends AppCompatActivity {
                 Log.e("Not Response", t.getLocalizedMessage());
             }
         });
+    }
+
+    private void noticeDialog(String title, String message) {
+        AlertDialog alertDialog = new AlertDialog.Builder(ChangeaddrActivity.this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "닫기",
+                new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 }

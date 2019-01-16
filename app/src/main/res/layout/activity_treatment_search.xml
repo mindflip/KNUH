@@ -8,22 +8,22 @@
     tools:context=".treatment.Treatment_Search_Activity">
 
     <ListView
-        android:layout_marginTop="10dp"
+        android:id="@+id/lvGetPrescList"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:layout_weight="9"
-        android:id="@+id/listView1">
+        android:layout_marginTop="10dp"
+        android:layout_weight="9">
 
     </ListView>
 
     <Button
-        android:id="@+id/treatmentsearch"
+        android:id="@+id/btGetPrescList"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_weight="1"
         android:background="@drawable/button_design1"
-        android:textColor="#ffffff"
-        android:text="처방조회"/>
+        android:text="처방조회"
+        android:textColor="#ffffff" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"

@@ -4,37 +4,31 @@ package com.example.user.knuhui.networkmanager.model.reservation.search.getRevLi
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
+
+@Root(name = "result", strict = false)
 public class GetRevListResult {
 
-    @SerializedName("receiptNo")
-    @Expose
+    @Element
     private String receiptNo;
-    @SerializedName("departmentNm")
-    @Expose
+    @Element
     private String departmentNm;
-    @SerializedName("departmentCd")
-    @Expose
+    @Element
     private String departmentCd;
-    @SerializedName("doctorNm")
-    @Expose
+    @Element
     private String doctorNm;
-    @SerializedName("doctorId")
-    @Expose
+    @Element
     private String doctorId;
-    @SerializedName("dataDate")
-    @Expose
+    @Element
     private String dataDate;
-    @SerializedName("dataTime")
-    @Expose
+    @Element
     private String dataTime;
-    @SerializedName("receiptGubunKindNm")
-    @Expose
+    @Element
     private String receiptGubunKindNm;
-    @SerializedName("reservationMethod")
-    @Expose
+    @Element
     private String reservationMethod;
-    @SerializedName("ordExamKindNm")
-    @Expose
+    @Element
     private String ordExamKindNm;
 
     public String getReceiptNo() {

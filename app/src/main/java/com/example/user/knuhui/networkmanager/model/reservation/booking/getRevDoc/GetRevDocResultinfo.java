@@ -16,7 +16,7 @@ public class GetRevDocResultinfo {
     @ElementList(inline = true, required = false)
     private List<GetRevDocResult> result;
     @Element
-    private GetRevDocMessage message;
+    private GetRevDocResultKM resultKM;
 
     public List<GetRevDocResult> getResult() {
         return result;
@@ -26,12 +26,11 @@ public class GetRevDocResultinfo {
         this.result = result;
     }
 
-    public GetRevDocMessage getMessage() {
-        return message;
+    public GetRevDocResultKM getResultKM() {
+        return resultKM;
     }
 
-    public void setMessage(GetRevDocMessage message) {
-        this.message = message;
+    public void setResultKM(GetRevDocResultKM resultKM) {
+        this.resultKM = resultKM;
     }
-
 }

@@ -148,7 +148,7 @@
             android:id="@+id/tvExpDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="*날짜 - 2018 년 12 월 기준" />
+            android:text="*날짜" />
 
         <Button
             android:id="@+id/btReservation"

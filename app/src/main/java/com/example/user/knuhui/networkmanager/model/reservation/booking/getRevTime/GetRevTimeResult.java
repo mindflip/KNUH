@@ -13,10 +13,10 @@ public class GetRevTimeResult {
 
     @Element
     private String dataTime;
-    @Element
-    private List<Object> firstReservCnt = null;
-    @Element
-    private List<Object> secondReservCnt = null;
+    @Element(required = false)
+    private String firstReservCnt;
+    @Element(required = false)
+    private String secondReservCnt;
     @Element
     private String availReservCnt;
     @Element
@@ -32,19 +32,19 @@ public class GetRevTimeResult {
         this.dataTime = dataTime;
     }
 
-    public List<Object> getFirstReservCnt() {
+    public String getFirstReservCnt() {
         return firstReservCnt;
     }
 
-    public void setFirstReservCnt(List<Object> firstReservCnt) {
+    public void setFirstReservCnt(String firstReservCnt) {
         this.firstReservCnt = firstReservCnt;
     }
 
-    public List<Object> getSecondReservCnt() {
+    public String getSecondReservCnt() {
         return secondReservCnt;
     }
 
-    public void setSecondReservCnt(List<Object> secondReservCnt) {
+    public void setSecondReservCnt(String secondReservCnt) {
         this.secondReservCnt = secondReservCnt;
     }
 

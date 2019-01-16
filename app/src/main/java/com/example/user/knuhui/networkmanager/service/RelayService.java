@@ -1,6 +1,8 @@
 package com.example.user.knuhui.networkmanager.service;
 
 import com.example.user.knuhui.networkmanager.model.User;
+import com.example.user.knuhui.networkmanager.model.history.getOutList.GetOutList;
+import com.example.user.knuhui.networkmanager.model.prescription.getPrescList.GetPrescList;
 import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDate.GetRevDate;
 import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDept.GetRevDept;
 import com.example.user.knuhui.networkmanager.model.reservation.booking.getRevDoc.GetRevDoc;
@@ -44,6 +46,8 @@ public interface RelayService {
 
 
     // ---------------------  실제 서비스에 들어갈 Call method
+
+    // ---------- 예약 ---------
     //예약가능한 진료과
     @GET("getreq?domain=com&submit_id=TRZIF00019&business_id=com&hospitalCd=031")
     Call<GetRevDept> getRevDept();
@@ -76,6 +80,8 @@ public interface RelayService {
     Call<PutRevCancel> putRevCancel(@Query("departmentCd") String departmentCd, @Query("doctorId") String doctorId, @Query("dataDate") String dataDate,
                                     @Query("pNm") String pNm, @Query("pId") String pId, @Query("receiptNo") String receiptNo);
 
+
+    // ---------- 환자 정보 ---------
     //환자정보 조회
     @GET("getreq?domain=hit&submit_id=TRZIF00002&business_id=com&hospitalCd=031")
     Call<GetUserInfo> getUserInfo(@Query("pId") String pId);
@@ -94,5 +100,16 @@ public interface RelayService {
 
     //환자 주소 수정
     @POST("postreq?domain=hit&submit_id=TXZIF00009&business_id=com&hospitalCd=031")
-    Call<UpdateAddress> updateAddress(@Query("pId") String pId, @Query("zipCode") String zipCode, @Query("zipCodeTxt") String zipCodeTxt, @Query("address") String address);
+    Call<UpdateAddress> updateAddress(@Query("pId") String pId, @Query("zipCode") String zipCode, @Query(value = "zipCodeTxt", encoded = true) String zipCodeTxt, @Query(value = "address", encoded = true) String address);
+
+
+    // ---------- 진료이력조회 ---------
+    //수진이력정보조회(외래)
+    @GET("getreq?domain=hit&submit_id=TRZIF00006&business_id=com&hospitalCd=031")
+    Call<GetOutList> getOutList(@Query("pId") String pId, @Query("startDt") String startDt, @Query("endDt") String endDt);
+
+    // ---------- 처방조회 ---------
+    //처방조회
+    @GET("getreq?domain=com&submit_id=TRZIF00016&hospitalCd=031&business_id=com")
+    Call<GetPrescList> getPrescList(@Query("pId") String pId, @Query("startDt") String startDt, @Query("endDt") String endDt);
 }

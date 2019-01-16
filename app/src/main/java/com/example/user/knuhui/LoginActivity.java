@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.user.knuhui.networkmanager.service.TempUsers;
 
+import java.io.UnsupportedEncodingException;
+
 public class LoginActivity extends AppCompatActivity {
 
     private Button btLogin;
@@ -58,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     private void initLayout() {

@@ -9,9 +9,14 @@ import android.widget.TextView;
 
 import com.example.user.knuhui.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class History1_ListViewAdapter extends BaseAdapter {
+
+    private TextView tvTreatHistDept, tvTreatHistDoc, tvTreatHistDate;
+
     private ArrayList<History1Item> listViewItemList = new ArrayList<History1Item>() ;
 
     public History1_ListViewAdapter(){
@@ -33,17 +38,15 @@ public class History1_ListViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.history1_item, parent, false);
         }
 
-        TextView textView1 = (TextView)convertView.findViewById(R.id.dept);
-        TextView textView2 = (TextView)convertView.findViewById(R.id.doctor);
-        TextView textView3 = (TextView)convertView.findViewById(R.id.date);
-
+        tvTreatHistDept = (TextView) convertView.findViewById(R.id.tvTreatHistDept);
+        tvTreatHistDoc = (TextView) convertView.findViewById(R.id.tvTreatHistDoc);
+        tvTreatHistDate = (TextView) convertView.findViewById(R.id.tvTreatHistDate);
 
         History1Item listViewItem = listViewItemList.get(position);
 
-
-        textView1.setText(listViewItem.getDept());
-        textView2.setText(listViewItem.getDoctor());
-        textView3.setText(listViewItem.getDate());
+        tvTreatHistDept.setText(listViewItem.getDept());
+        tvTreatHistDoc.setText(listViewItem.getDoctor());
+        tvTreatHistDate.setText(listViewItem.getDate());
 
         return convertView;
     }

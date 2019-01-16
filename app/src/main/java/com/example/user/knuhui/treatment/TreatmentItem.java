@@ -1,76 +1,86 @@
 package com.example.user.knuhui.treatment;
 
 public class TreatmentItem {
-    private String name;
+
     private String dept;
     private String date;
-    private String chemical_name;
-    private String prescription_amount;
-    private String number;
-    private String days;
-    private String usage_name;
+    private String medicineNm;
+    private String dose;
+    private String doseTm;
+    private String doseDay;
+    private String usageNm;
+    private String effectNm;
+    private String dangerNote;
 
-    public void setName(String name) {
-        this.name = name;
+    public String getDept() {
+        return dept;
     }
 
     public void setDept(String dept) {
         this.dept = dept;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setChemical_name(String chemical_name) {
-        this.chemical_name = chemical_name;
-    }
-
-    public void setPrescription_amount(String prescription_amount) {
-        this.prescription_amount = prescription_amount;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public void setDays(String days) {
-        this.days = days;
-    }
-
-    public void setUsage_name(String usage_name) {
-        this.usage_name = usage_name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDept() {
-        return dept;
-    }
-
     public String getDate() {
         return date;
     }
 
-    public String getChemical_name() {
-        return chemical_name;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getPrescription_amount() {
-        return prescription_amount;
+    public String getMedicineNm() {
+        return medicineNm;
     }
 
-    public String getNumber() {
-        return number;
+    public void setMedicineNm(String medicineNm) {
+        this.medicineNm = medicineNm;
     }
 
-    public String getDays() {
-        return days;
+    public String getDose() {
+        return dose;
     }
 
-    public String getUsage_name() {
-        return usage_name;
+    public void setDose(String dose) {
+        this.dose = dose;
+    }
+
+    public String getDoseTm() {
+        return doseTm;
+    }
+
+    public void setDoseTm(String doseTm) {
+        this.doseTm = doseTm;
+    }
+
+    public String getDoseDay() {
+        return doseDay;
+    }
+
+    public void setDoseDay(String doseDay) {
+        this.doseDay = doseDay;
+    }
+
+    public String getUsageNm() {
+        return usageNm;
+    }
+
+    public void setUsageNm(String usageNm) {
+        this.usageNm = usageNm;
+    }
+
+    public String getEffectNm() {
+        return effectNm;
+    }
+
+    public void setEffectNm(String effectNm) {
+        this.effectNm = effectNm;
+    }
+
+    public String getDangerNote() {
+        return dangerNote;
+    }
+
+    public void setDangerNote(String dangerNote) {
+        this.dangerNote = dangerNote;
     }
 }
